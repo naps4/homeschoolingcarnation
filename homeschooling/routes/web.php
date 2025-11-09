@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 // IMPORT CONTROLLER BARU KITA DI ATAS
 use App\Http\Controllers\GoogleLoginController;
+use App\Http\Controllers\DaftarTrialController;
+use App\Http\Controllers\DaftarOnlineController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,28 +32,50 @@ Route::get('/', function () {
 })->name('home');
 
 
-// ==========================================================
 // PENGGUNA YANG SUDAH LOGIN (WAJIB AUTH)
 // ==========================================================
-
 Route::middleware(['auth'])->group(function () {
     
     Route::get('/dashboard', function () {
-        return view('welcome'); // Diarahkan ke welcome
+        return view('welcome');
     })->name('dashboard');
 
-    // Rute untuk Halaman DAFTAR ONLINE
-    Route::get('/daftar-online', function () {
-        return view('daftar-online');
-    })->name('daftar.online');
+    // ===========================================
+    // == PERUBAHAN UNTUK DAFTAR ONLINE ==
+    // ===========================================
+    // GET: Menampilkan formulir
+    Route::get('/daftar-online', [DaftarOnlineController::class, 'create'])->name('daftar.online');
+    
+    // POST: Menyimpan formulir
+    Route::post('/daftar-online', [DaftarOnlineController::class, 'store']);
+    // ===========================================
 
-    // Rute untuk Halaman DAFTAR TRIAL
-    Route::get('/daftar-trial', function () {
-        return view('daftar-trial');
-    })->name('daftar.trial');
+
+    // Rute Daftar Trial (biarkan)
+    Route::get('/daftar-trial', [DaftarTrialController::class, 'create'])->name('daftar.trial');
+    Route::post('/daftar-trial', [DaftarTrialController::class, 'store']);
 
 });
 
+Route::middleware(['auth'])->group(function () {
+
+    // ... (route dashboard dan daftar-trial Anda) ...
+
+    // GET: Menampilkan formulir
+    Route::get('/daftar-online', [DaftarOnlineController::class, 'create'])->name('daftar.online');
+
+    // POST: Menyimpan formulir
+    Route::post('/daftar-online', [DaftarOnlineController::class, 'store']); // <-- JANGAN UBAH INI
+
+    // ===========================================
+    // == TAMBAHKAN ROUTE BARU INI ==
+    // ===========================================
+    // GET: Menampilkan halaman "Bukti Pendaftaran"
+    Route::get('/daftar-online/bukti/{id}', [DaftarOnlineController::class, 'showBukti'])
+         ->name('daftar.online.bukti');
+    // ===========================================
+
+});
 
 // ==========================================================
 // RUTE BAWAAN AUTH (JANGAN DIHAPUS)

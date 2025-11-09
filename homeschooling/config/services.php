@@ -18,18 +18,20 @@ return [
     // == TAMBAHKAN BLOK INI ==
     // ===========================================
     'google' => [
-        'client_id' => env('GOOGLE_CLIENT_ID'),
-        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => 'http://127.0.0.1:8000/auth/google/callback',
-        
-        // ===========================================
-        // == TAMBAHKAN BARIS INI ==
-        // ===========================================
-        'guzzle' => [
-            'verify' => 'C:\xampp\php\extras\ssl\cacert.pem'
-        ],
-        // ===========================================
+    'client_id' => env('GOOGLE_CLIENT_ID'),
+    'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+    'redirect' => 'http://127.0.0.1:8000/auth/google/callback',
+
+    // ===========================================
+    // == INI ADALAH PERBAIKANNYA ==
+    // ===========================================
+    // Memaksa Guzzle (alat koneksi PHP) untuk 
+    // melewatkan verifikasi SSL di XAMPP
+    'guzzle' => [
+        'verify' => false
     ],
+    // ===========================================
+],
     // ===========================================
 
 

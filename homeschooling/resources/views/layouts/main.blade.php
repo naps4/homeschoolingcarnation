@@ -126,8 +126,15 @@
             @endauth
         </div>
     </nav>
+    @if (session('status'))
+        <div class="container" style="margin-bottom: -1rem;">
+            <div style="background-color: #d4edda; color: #155724; border-color: #c3e6cb; padding: 1rem; border-radius: 5px; text-align: center; font-weight: 600;">
+                {{ session('status') }}
+            </div>
+        </div>
+    @endif
 
-    <main>
+    <main>        
         @yield('content')
     </main>
     
