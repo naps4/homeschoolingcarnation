@@ -25,6 +25,65 @@
             background-color: #f4f4f8; 
             min-height: 100vh;
         }
+        
+        /* =====================================
+        == KODE BARU: TOP HEADER MERAH 
+        ===================================== */
+        .top-header {
+            /* Warna merah pekat seperti di gambar */
+            background-color: #d11e1f; 
+            color: #ffffff;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            /* Jarak antara logo dan teks */
+            gap: 15px; 
+        }
+
+        .top-header .logo {
+            width: 50px; /* Ukuran default logo */
+            height: 50px;
+            /* Pastikan logo diletakkan di tengah secara vertikal jika ukurannya berbeda */
+            align-self: flex-start; 
+        }
+
+        .top-header .header-content {
+            flex-grow: 1; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .top-header h3 {
+            /* SELAMAT DATANG DI WEBSITE - Menggunakan font kecil (Pacifico kurang terbaca) */
+            font-family: 'Poppins', sans-serif; 
+            font-size: 0.7rem; 
+            font-weight: 400;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .top-header h2 {
+            /* HOMESCHOOLING CARNATION CIREBON - Font tebal */
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.4rem; 
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.1;
+        }
+
+        .top-header .tagline {
+            /* "Menyenangkan, Cerdas, dan Sukses" */
+            font-family: 'Pacifico', cursive; /* Menggunakan font tulisan tangan */
+            font-size: 0.9rem;
+            font-weight: 400;
+            margin-top: 5px;
+        }
+        
+        /* =====================================
+        == AKHIR KODE BARU: TOP HEADER MERAH
+        ===================================== */
+
 
         /* == HEADER BANNER (PENSIL) == */
         .header-banner {
@@ -82,91 +141,104 @@
             padding: 0 1.5rem;
         }
         
-        /* =====================================
-        == PERUBAHAN FONT DI SINI          ==
-        =====================================
-        */
         .welcome-header {
-            margin-bottom: 2rem; /* Tambah jarak ke tombol */
+            margin-bottom: 2rem; 
             text-align: center;
         }
         
         .welcome-header h1 {
-            /* MENGGUNAKAN FONT 'OSWALD' YANG TEGAS */
             font-family: 'Oswald', sans-serif;
-            font-size: 2.8rem; /* Sedikit lebih besar */
+            font-size: 2.8rem; 
             color: #222;
             font-weight: 700;
             text-transform: uppercase;
         }
         
         .welcome-header p {
-            /* MENGGUNAKAN FONT 'PACIFICO' (TULISAN TANGAN) */
             font-family: 'Pacifico', cursive;
-            font-size: 1.8rem; /* Dibuat lebih besar agar terbaca */
+            font-size: 1.8rem;
             color: #444;
             margin-top: 0.5rem;
         }
 
         /* =====================================
-        == CSS UNTUK TOMBOL           ==
-        =====================================
-        */
+        == CSS UNTUK TOMBOL           ==
+        ===================================== */
         .cta-section {
             display: flex;
-            justify-content: center; /* Tombol di tengah */
+            justify-content: center; 
             align-items: center;
-            gap: 2rem; /* Jarak antar tombol */
-            flex-wrap: wrap; /* Tombol akan turun ke bawah di HP */
-            margin-top: 2rem; /* Jarak dari header */
+            gap: 2rem; 
+            flex-wrap: wrap; 
+            margin-top: 2rem; 
             padding: 2rem 0;
-            border-top: 1px solid #ddd; /* Garis pemisah */
+            border-top: 1px solid #ddd; 
         }
         
         .cta-button {
             padding: 0.8rem 2.5rem;
-            border-radius: 50px; /* Membuat bentuk lonjong/pill */
+            border-radius: 50px; 
             text-decoration: none;
             color: #ffffff;
             
-            /* Menggunakan font 'Oswald' agar sama tebalnya */
             font-family: 'Oswald', sans-serif;
             font-size: 1.1rem;
             font-weight: 700;
             
-            /* Efek bayangan pada teks (seperti di gambar) */
             text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
             
-            /* Efek bayangan pada tombol (agar terlihat 'mengambang') */
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
             
             transition: all 0.3s ease;
         }
         
         .cta-button:hover {
-            transform: translateY(-3px); /* Efek terangkat saat di-hover */
+            transform: translateY(-3px); 
             box-shadow: 0 6px 15px rgba(0,0,0,0.25);
         }
 
         /* Tombol Merah */
         .btn-red {
-            background-color: #ff0000; /* Merah menyala */
+            background-color: #ff0000; 
         }
         .btn-red:hover {
-            background-color: #d90000; /* Merah sedikit gelap */
+            background-color: #d90000; 
         }
 
         /* Tombol Hijau */
         .btn-green {
-            background-color: #00ff00; /* Hijau menyala */
+            background-color: #00ff00; 
         }
         .btn-green:hover {
-            background-color: #00d900; /* Hijau sedikit gelap */
+            background-color: #00d900; 
         }
 
 
         /* --- Media Query untuk Responsif --- */
         @media (max-width: 600px) {
+             /* Perubahan pada Top Header Merah di HP */
+            .top-header {
+                padding: 0.75rem 1rem;
+                /* Agar teks besar tidak terpotong, susun ke bawah */
+                flex-wrap: wrap; 
+                text-align: center;
+            }
+             .top-header .logo {
+                width: 40px; 
+                height: 40px;
+                 /* Posisikan logo di tengah saat wrapping */
+                margin: 0 auto; 
+            }
+            .top-header .header-content {
+                width: 100%;
+            }
+            .top-header h2 {
+                font-size: 1.1rem;
+            }
+            .top-header h3, .top-header .tagline {
+                font-size: 0.7rem;
+            }
+            
             .header-banner {
                 height: 100px;
             }
@@ -183,19 +255,19 @@
             }
             
             .welcome-header h1 {
-                font-size: 2rem; /* Ukuran font di HP */
+                font-size: 2rem; 
             }
             .welcome-header p {
-                font-size: 1.5rem; /* Ukuran font di HP */
+                font-size: 1.5rem; 
             }
 
             /* Tombol di HP */
             .cta-section {
-                flex-direction: column; /* Susun tombol ke bawah */
+                flex-direction: column; 
                 gap: 1rem;
             }
             .cta-button {
-                width: 80%; /* Lebar tombol di HP */
+                width: 80%; 
                 text-align: center;
             }
         }
@@ -204,6 +276,14 @@
 </head>
 <body>
 
+    <div class="top-header">
+        <img src="" alt="Logo Homeschooling Carnation Cirebon" class="logo">
+        <div class="header-content">
+            <h3>SELAMAT DATANG DI WEBSITE</h3> 
+            <h2>HOMESCHOOLING CARNATION CIREBON</h2>
+            <p class="tagline">"Menyenangkan, Cerdas, dan Sukses"</p>
+        </div>
+    </div>
     <header class="header-banner">
         </header>
 

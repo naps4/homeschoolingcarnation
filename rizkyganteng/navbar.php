@@ -91,8 +91,8 @@
         .header-banner {
             height: 150px;
             background-image: url('URL_PENSIL');
-        }
-        */
+        } */
+       
 
         /* == NAVBAR (PUTIH) == */
         .navbar {
@@ -204,7 +204,7 @@
 
     <header>
         <div class="top-header">
-            <img src="" alt="Logo Homeschooling Carnation Cirebon" class="logo">
+            <img src="Logo HSCC Genap - Copy.png" alt="Logo HSCC" class="logo">
             <div class="header-content">
                 <h3>SELAMAT DATANG DI WEBSITE</h3> 
                 <h2>HOMESCHOOLING CARNATION CIREBON</h2>
@@ -216,7 +216,7 @@
 
     <nav class="navbar">
         <div class="nav-links">
-            <a href="/tentang">Tentang</a>
+            <a href="tentang.php">Tentang</a>
             <a href="/ebook">E-book</a>
             <a href="/pendaftaran">Pendaftaran</a>
             <a href="/kontak">Kontak</a>
