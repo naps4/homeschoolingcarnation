@@ -89,5 +89,5 @@ jobs:
 
       - name: Run All Tests with Pest
         run: |
-          ./vendor/bin/pest --coverage-html=coverage/html \
+          ./vendor/bin/pest --coverage-html=coverage/html --coverage-filter=app
         working-directory: homeschooling
