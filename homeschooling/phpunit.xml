@@ -3,6 +3,10 @@
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          bootstrap="vendor/autoload.php"
          colors="true"
+         verbose="true"
+         stopOnFailure="false"
+         backupGlobals="false"
+         backupStaticAttributes="false"
 >
     <testsuites>
         <testsuite name="Unit">
@@ -12,15 +16,26 @@
             <directory>tests/Feature</directory>
         </testsuite>
     </testsuites>
-    <source>
-        <include>
-            <directory>app</directory>
-        </include>
-    </source>
+
     <php>
         <env name="APP_ENV" value="testing"/>
         <env name="DB_CONNECTION" value="mysql"/>
+        <env name="DB_HOST" value="127.0.0.1"/>
+        <env name="DB_PORT" value="3306"/>
         <env name="DB_DATABASE" value="db_homeschoolingTest"/>
-
+        <env name="DB_USERNAME" value="hometest"/>
+        <env name="DB_PASSWORD" value="secret"/>
     </php>
+
+    <logging>
+        <log type="coverage-clover" target="coverage/clover.xml"/>
+        <log type="coverage-html" target="coverage/html"/>
+        <log type="coverage-text" target="coverage/coverage.txt"/>
+    </logging>
+
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory>app</directory>
+        </include>
+    </coverage>
 </phpunit>

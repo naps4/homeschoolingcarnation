@@ -1,4 +1,4 @@
-name: Laravel CI - Feature Tests + Coverage
+name: Laravel CI - All Tests + Coverage
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  feature-tests:
+  tests:
     runs-on: ubuntu-latest
 
     services:
@@ -74,9 +74,9 @@ jobs:
         run: php artisan migrate --force
         working-directory: homeschooling
 
-      - name: Run Feature Tests with Code Coverage
+      - name: Run All Tests with Code Coverage
         run: |
-          vendor/bin/phpunit --testsuite=Feature \
+          vendor/bin/phpunit --verbose \
             --coverage-text \
             --coverage-html=coverage \
             --coverage-clover=coverage/clover.xml
