@@ -54,21 +54,25 @@ jobs:
       - name: Cache Composer dependencies
         uses: actions/cache@v3
         with:
-          path: vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          path: homeschooling/vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('homeschooling/**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-progress --no-interaction
+        working-directory: homeschooling
 
       - name: Copy .env
         run: cp .env.testing .env
+        working-directory: homeschooling
 
       - name: Generate APP_KEY
         run: php artisan key:generate
+        working-directory: homeschooling
 
       - name: Run Migrations
         run: php artisan migrate --force
+        working-directory: homeschooling
 
       - name: Run Feature Tests with Code Coverage
         run: |
@@ -76,3 +80,4 @@ jobs:
             --coverage-text \
             --coverage-html=coverage \
             --coverage-clover=coverage/clover.xml
+        working-directory: homeschooling
