@@ -74,6 +74,19 @@ jobs:
         run: php artisan migrate --force
         working-directory: homeschooling
 
+      - name: Setup Node.js
+  			uses: actions/setup-node@v3
+  			with:
+    				node-version: 20
+
+			- name: Install Node dependencies
+			  run: npm install
+			  working-directory: homeschooling
+			
+			- name: Build frontend assets
+			  run: npm run build
+			  working-directory: homeschooling
+
       - name: Run All Tests with pest
         run: |
           ./vendor/bin/pest --coverage-text=coverage/coverage.txt \
