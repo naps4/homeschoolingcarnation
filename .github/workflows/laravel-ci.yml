@@ -89,7 +89,5 @@ jobs:
 
       - name: Run All Tests with Pest
         run: |
-          ./vendor/bin/pest --coverage-text=coverage/coverage.txt \
-                            --coverage-html=coverage/html \
-                            --coverage-clover=coverage/clover.xml
+          ./vendor/bin/pest --coverage-html=coverage/html \
         working-directory: homeschooling
