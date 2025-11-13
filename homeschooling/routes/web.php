@@ -28,7 +28,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Rute daftar trial
     Route::get('/daftar-trial', [DaftarTrialController::class, 'create'])->name('daftar.trial');
-    Route::post('/daftar-trial', [DaftarTrialController::class, 'store']);
+    Route::post('/daftar-trial', [DaftarTrialController::class, 'store'])->name('daftar.trial.store');
 
     // Rute daftar online
     Route::get('/daftar-online', [DaftarOnlineController::class, 'create'])->name('daftar.online');

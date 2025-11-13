@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <form id="multiStepForm" action="{{ route('daftar.trial') }}" method="POST">
+        <form id="multiStepForm" action="{{ route('daftar.trial.store') }}" method="POST">
             @csrf
             
             <div class="form-step active" id="step-1">
