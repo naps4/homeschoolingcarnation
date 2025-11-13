@@ -50,7 +50,6 @@ class DaftarOnlineController extends Controller
 
         $validatedData['user_id'] = Auth::id();
 
-        // 👇 Bypass upload untuk testing
         if (app()->environment('testing')) {
             $validatedData['file_kk_ktp'] = 'dummy_kk.pdf';
             $validatedData['file_ijazah'] = 'dummy_ijazah.pdf';

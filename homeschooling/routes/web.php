@@ -31,7 +31,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/daftar-trial', [DaftarTrialController::class, 'store']);
 
     // Rute daftar online
-    Route::get('/daftar-online', [DaftarOnlineController::class, 'create']);
+    Route::get('/daftar-online', [DaftarOnlineController::class, 'create'])->name('daftar.online');
     Route::post('/daftar-online', [DaftarOnlineController::class, 'store'])->name('daftar.online.store');
     Route::get('/daftar-online/bukti/{id}', [DaftarOnlineController::class, 'showBukti'])
          ->name('daftar.online.bukti');
