@@ -1,4 +1,4 @@
-name: Laravel CI - All Tests + HTML Coverage
+name: Laravel CI - All Tests + HTML & XML Coverage
 
 on:
   push:
@@ -40,9 +40,11 @@ jobs:
       LOG_CHANNEL: stack
 
     steps:
+      # Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # Set up PHP
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -51,6 +53,7 @@ jobs:
           coverage: pcov
           ini-values: date.timezone=Asia/Jakarta
 
+      # Cache Composer dependencies
       - name: Cache Composer dependencies
         uses: actions/cache@v3
         with:
@@ -58,41 +61,61 @@ jobs:
           key: ${{ runner.os }}-composer-${{ hashFiles('homeschooling/**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
 
+      # Install Composer dependencies
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-progress --no-interaction
         working-directory: homeschooling
 
+      # Copy .env
       - name: Copy .env
         run: cp .env.example .env
         working-directory: homeschooling
 
+      # Generate APP_KEY
       - name: Generate APP_KEY
         run: php artisan key:generate
         working-directory: homeschooling
 
+      # Run migrations
       - name: Run Migrations
         run: php artisan migrate --force
         working-directory: homeschooling
 
+      # Setup Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
 
+      # Install Node dependencies
       - name: Install Node dependencies
         run: npm install
         working-directory: homeschooling
 
+      # Build frontend assets
       - name: Build frontend assets
         run: npm run build
         working-directory: homeschooling
 
-      - name: Run All Tests + HTML Coverage
-        run: ./vendor/bin/pest --coverage-html=coverage/html --coverage-filter=app
+      # Run all tests + generate HTML & XML coverage
+      - name: Run All Tests + Coverage
+        run: |
+          ./vendor/bin/pest \
+            --coverage-html=coverage/html \
+            --coverage-clover=coverage/clover.xml \
+            --coverage-filter=app
         working-directory: homeschooling
 
+      # Upload HTML coverage as artifact
       - name: Upload Coverage HTML Artifact
         uses: actions/upload-artifact@v4
         with:
           name: coverage-html
           path: homeschooling/coverage/html
+
+      # Upload XML coverage as artifact
+      - name: Upload Coverage XML Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-xml
+          path: homeschooling/coverage/clover.xml
