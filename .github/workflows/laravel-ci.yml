@@ -75,21 +75,21 @@ jobs:
         working-directory: homeschooling
 
       - name: Setup Node.js
-  			uses: actions/setup-node@v3
-  			with:
-    				node-version: 20
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
 
-			- name: Install Node dependencies
-			  run: npm install
-			  working-directory: homeschooling
-			
-			- name: Build frontend assets
-			  run: npm run build
-			  working-directory: homeschooling
+      - name: Install Node dependencies
+        run: npm install
+        working-directory: homeschooling
 
-      - name: Run All Tests with pest
+      - name: Build frontend assets
+        run: npm run build
+        working-directory: homeschooling
+
+      - name: Run All Tests with Pest
         run: |
           ./vendor/bin/pest --coverage-text=coverage/coverage.txt \
-            --coverage-html=coverage/html \
-            --coverage-clover=coverage/clover.xml
+                            --coverage-html=coverage/html \
+                            --coverage-clover=coverage/clover.xml
         working-directory: homeschooling
