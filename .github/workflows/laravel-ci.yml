@@ -1,4 +1,4 @@
-name: Laravel CI - All Tests + Coverage
+name: Laravel CI - All Tests + HTML Coverage
 
 on:
   push:
@@ -74,7 +74,7 @@ jobs:
         run: php artisan migrate --force
         working-directory: homeschooling
 
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
@@ -87,7 +87,12 @@ jobs:
         run: npm run build
         working-directory: homeschooling
 
-      - name: Run All Tests with Pest
-        run: |
-          ./vendor/bin/pest --coverage-html=coverage/html --coverage-filter=app
+      - name: Run All Tests + HTML Coverage
+        run: ./vendor/bin/pest --coverage-html=coverage/html --coverage-filter=app
         working-directory: homeschooling
+
+      - name: Upload Coverage HTML Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-html
+          path: homeschooling/coverage/html
