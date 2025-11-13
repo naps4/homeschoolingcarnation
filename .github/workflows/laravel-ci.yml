@@ -92,7 +92,7 @@ jobs:
         working-directory: homeschooling
 
       - name: Upload Coverage HTML Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-html
           path: homeschooling/coverage/html
