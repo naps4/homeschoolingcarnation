@@ -63,7 +63,7 @@ jobs:
         working-directory: homeschooling
 
       - name: Copy .env
-        run: cp .env.testing .env
+        run: cp .env.example .env
         working-directory: homeschooling
 
       - name: Generate APP_KEY
