@@ -3,8 +3,7 @@
          colors="true"
          stopOnFailure="false"
          failOnWarning="true"
-         failOnRisky="true"
-         verbose="true">
+         failOnRisky="true">
 
     <!-- Test Suites -->
     <testsuites>
@@ -16,7 +15,7 @@
         </testsuite>
     </testsuites>
 
-    <!-- Code Coverage Configuration -->
+    <!-- Code Coverage -->
     <coverage processUncoveredFiles="true">
         <include>
             <directory>app</directory>
