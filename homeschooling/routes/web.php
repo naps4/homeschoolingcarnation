@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\DaftarTrialController;
 use App\Http\Controllers\DaftarOnlineController;
+use App\Http\Controllers\BotManController;
 
 // ==========================================================
 // RUTE LOGIN GOOGLE
@@ -37,6 +38,8 @@ Route::middleware(['auth'])->group(function () {
          ->name('daftar.online.bukti');
 });
 
+// Route untuk Chatbot (Letakkan di atas route home)
+Route::match(['get', 'post'], '/botman', [BotManController::class, 'handle']);
 // ==========================================================
 // RUTE AUTH
 // ==========================================================
