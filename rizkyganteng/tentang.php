@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Pacifico&family=Poppins:wght@400;400;600;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
 
     <style>
@@ -23,14 +25,14 @@
             font-family: 'Poppins', sans-serif;
             background-color: #f4f4f8; 
             min-height: 100vh;
+            padding-bottom: 0; 
         }
         
         header {
             width: 100%;
         }
-
-        /* (CSS TOP HEADER DAN NAVBAR TIDAK BERUBAH) */
         
+        /* == TOP HEADER (MERAH) == */
         .top-header {
             background-color: #d11e1f; 
             color: #ffffff;
@@ -127,14 +129,13 @@
         }
         
         /* =====================================
-        == STYLING UMUM BLOK (PERBAIKAN TATA LETAK HORIZONTAL)
+        == STYLING UMUM BLOK KONTEN
         ===================================== */
         .about-section h1, .kurikulum-section h1, .legalitas-section h1 {
             font-family: 'Poppins', sans-serif; 
             font-size: 1.2rem;
             font-weight: 600;
             color: #333;
-            /* Tambahkan margin atas untuk memberi jarak dari section sebelumnya */
             margin-top: 3rem; 
             margin-bottom: 1.5rem;
         }
@@ -162,7 +163,6 @@
             max-width: 40%; 
         }
         
-        /* Penyesuaian khusus untuk gambar Kurikulum Merdeka */
         .about-block .img-kurikulum {
             width: 150px; 
             height: auto;
@@ -180,7 +180,6 @@
             flex-grow: 1; 
         }
         
-        /* Legalitas Content (Gambar Kanan, Teks Kiri) */
         .legalitas-content {
             display: flex;
             flex-wrap: nowrap; 
@@ -217,9 +216,7 @@
             max-width: 35%; 
         }
 
-        /* =====================================
-        == PERBAIKAN: PROGRAM PENDIDIKAN (SAC & LOS)
-        ===================================== */
+        /* Program Pendidikan */
         .program-pendidikan {
             margin-top: 3rem;
             position: relative;
@@ -227,11 +224,10 @@
         }
         
         .program-pendidikan h4 {
-            /* KUNCI PERBAIKAN: Pindahkan ke KIRI (right: auto dan tambahkan left: 0) */
             position: absolute;
             top: -1.5rem; 
             left: 0; 
-            right: auto; /* Hilangkan posisi kanan */
+            right: auto; 
             font-size: 0.9rem;
             font-weight: 600;
             color: #333;
@@ -253,9 +249,148 @@
             flex: 1 1 48%; 
         }
         
-        /* (CSS Visi Misi, Legalitas, Pengajar, Alumni lainnya tidak berubah) */
+        /* Visi Misi, Legalitas, Pengajar, Alumni */
         .visi-misi-block {background-color: #e6f0ff; border: 1px solid #cce0ff; border-radius: 8px; padding: 1.5rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); position: relative;} .visi-misi-block h4 {font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 700; color: #000; text-align: center; margin-bottom: 0.5rem; padding-top: 10px;} .visi-misi-block .label {font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 700; color: #333; text-align: center; margin-bottom: 0.5rem;} .visi-misi-block .visi-text {text-align: center; font-style: italic; font-size: 1rem; color: #555; margin-bottom: 2rem; padding: 0 1rem;} .visi-misi-block .misi-list {list-style: none; padding-left: 0;} .visi-misi-block .misi-list li {font-size: 0.95rem; line-height: 1.8; color: #444; padding-left: 1.5rem; position: relative;} .visi-misi-block .misi-list li::before {content: '•'; color: #333; font-weight: bold; display: inline-block; width: 1em; margin-left: -1em;} .visi-misi-title {position: absolute; top: 10px; right: 1.5rem; font-size: 0.9rem; font-weight: 600; color: #333;} .legalitas-list li::before {content: '✓'; color: #1e90ff; font-weight: bold; display: inline-block; width: 1em; margin-left: -1em;} .tenaga-pengajar-section {margin-top: 3rem; margin-bottom: 3rem; position: relative;} .tenaga-pengajar-section h4 {position: absolute; top: -0.5rem; right: 0; font-size: 0.9rem; font-weight: 600; color: #333;} .pengajar-grid {background-color: #ffffff; border: 1px solid #cce0ff; border-radius: 8px; padding: 2rem 1.5rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5rem; justify-items: center;} .pengajar-card {text-align: center; display: flex; flex-direction: column; align-items: center;} .pengajar-card img {width: 80px; height: 80px; border-radius: 50%; border: 3px solid #e6f0ff; object-fit: cover; margin-bottom: 0.5rem;} .pengajar-card span {font-size: 0.8rem; font-weight: 600; color: #333; text-transform: uppercase;} .alumni-section {margin-top: 4rem;} .alumni-section h4 {font-family: 'Pacifico', cursive; font-size: 2rem; color: #333; text-align: center; margin-bottom: 2rem;} .alumni-grid {display: flex; gap: 20px; overflow-x: auto; padding-bottom: 1rem; justify-content: center;} .alumni-card {flex: 0 0 300px; background-color: #ffffff; border: 1px solid #cce0ff; border-radius: 8px; padding: 1rem; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); display: flex; flex-direction: column; min-height: 150px; margin-right: 1rem;} .alumni-card.large {flex: 0 0 450px; background-color: #e6f0ff;} .alumni-info {display: flex; align-items: center; margin-bottom: 0.5rem;} .alumni-info img {width: 50px; height: 50px; border-radius: 50%; margin-right: 10px; object-fit: cover;} .alumni-name-job span {display: block; font-size: 0.8rem; color: #666;} .alumni-card p.quote {font-size: 0.9rem; line-height: 1.5; color: #333; font-style: italic;}
-    
+        
+        /* =====================================
+        == STYLING BARU UNTUK FOOTER (DIRAPIKAN)
+        ===================================== */
+        .main-footer {
+            background-color: #ffffff;
+            color: #333;
+            padding: 4rem 1.5rem; 
+            border-top: 5px solid #d11e1f; 
+            font-size: 0.9rem;
+        }
+
+        .footer-content {
+            max-width: 1100px; 
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap; 
+        }
+
+        .footer-col {
+            flex: 1 1 250px; 
+            margin-bottom: 1.5rem; 
+        }
+
+        .footer-col h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700; 
+            margin-bottom: 1.2rem;
+            text-transform: uppercase;
+            color: #333;
+        }
+
+        .footer-col a, .footer-col li {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.8;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-col a:hover {
+            color: #d11e1f;
+        }
+        
+        /* --- Kolom Utama (Logo & Alamat) --- */
+        
+        .footer-logo-kurikulum {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-logo-kurikulum img {
+            height: 35px; 
+            margin-right: 15px;
+        }
+        
+        .footer-col.homeschooling h3 {
+            font-size: 1.2rem; 
+            font-weight: 700;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+            color: #d11e1f; 
+            text-transform: none; /* Override uppercase for main title */
+        }
+        
+        /* Garis biru kotak seperti di gambar untuk alamat utama, DIBUAT LEBIH RAPI */
+        .alamat-utama {
+            border: 1px solid #1e90ff; 
+            background-color: #f0f8ff; 
+            padding: 15px;
+            border-radius: 8px; 
+            margin-bottom: 15px;
+        }
+        
+        /* Styling untuk semua alamat dalam list */
+        .footer-col ul li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-col ul li i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            padding-top: 2px;
+            color: #d11e1f; 
+        }
+
+        /* Ikon alamat utama di dalam kotak biru berwarna biru */
+        .alamat-utama li i {
+            color: #1e90ff; 
+        }
+
+        /* --- Kolom Ikuti Kami (Media Sosial) --- */
+        .social-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .social-links li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        
+        .social-links li i {
+            margin-right: 10px;
+            font-size: 1.2rem; 
+            width: 20px;
+            text-align: center;
+            color: #555;
+            transition: color 0.2s;
+        }
+        
+        .social-links a:hover i {
+            color: #d11e1f;
+        }
+        
+        /* Tambahkan Copyright Bar di bawah */
+        .copyright {
+            max-width: 1100px;
+            margin: 2rem auto 0;
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px dashed #ccc;
+            color: #777;
+            font-size: 0.85rem;
+        }
+
+
         /* MEDIA QUERY */
         @media (max-width: 800px) {
             .about-block, .legalitas-content {flex-direction: column; flex-wrap: wrap; padding: 1rem;}
@@ -265,6 +400,21 @@
             .program-grid {flex-direction: column; flex-wrap: wrap; gap: 15px;}
             .program-card {min-width: 100%;}
             .top-header {padding: 0.75rem 1rem; flex-wrap: nowrap; gap: 10px; position: relative;} .top-header .logo {width: 45px; height: 45px; margin: 0;} .top-header .header-content {position: static; transform: none; left: auto; top: auto; text-align: left; padding: 0; width: auto; margin-left: 10px;} .top-header h2 {font-size: 1.1rem;} .top-header h3, .top-header .tagline {font-size: 0.7rem;} .navbar {padding: 0.5rem 0.5rem;} .navbar .nav-links a {font-size: 0.8rem; padding: 0.5rem 0.5rem;} .container {margin-top: 1rem;} .pengajar-grid {grid-template-columns: repeat(3, 1fr); gap: 1rem;} .pengajar-card img {width: 60px; height: 60px;} .alumni-grid {justify-content: flex-start; padding: 0 1rem;} .alumni-card {flex: 0 0 250px;} .alumni-card.large {flex: 0 0 350px;}
+            
+            /* Footer mobile */
+            .footer-content {
+                flex-direction: column; 
+                gap: 2rem;
+            }
+            .footer-col {
+                min-width: 100%; 
+            }
+            .alamat-utama {
+                padding: 15px;
+            }
+            .main-footer {
+                padding: 2rem 1rem;
+            }
         }
     </style>
 </head>
@@ -283,6 +433,7 @@
 
     <nav class="navbar">
         <div class="nav-links">
+            <a href="Dashboard.php">Dashboard</a>
             <a href="tentang.php" class="active">Tentang</a>
             <a href="/ebook">E-book</a>
             <a href="/pendaftaran">Pendaftaran</a>
@@ -329,7 +480,7 @@
             <h1>KURIKULUM & PENDIDIKAN</h1>
 
             <div class="about-block">
-                 <img src="kurikulum merdeka.png" alt="Logo Kurikulum Merdeka" class="img-kurikulum">
+                   <img src="kurikulum merdeka.png" alt="Logo Kurikulum Merdeka" class="img-kurikulum">
 
                 <p>
                     Sebagai lembaga pendidikan non formal, HSCC menyelenggarakan pendidikan kesetaraan di semua jenjang, mulai dari SD hingga SMA. Kami menawarkan paket A setara SD, paket B setara SMP, dan paket C setara SMA dengan dua pilihan jurusan, yaitu IPA dan IPS. Lulusan HSCC memiliki kesempatan untuk melanjutkan pendidikan ke sekolah formal hingga perguruan tinggi.
@@ -414,7 +565,7 @@
                             <span>Universitas/Job saat ini</span>
                         </div>
                     </div>
-                    <p class="quote">Kata-kata hari ini. Yang sudah selesai, boleh pulang.</p>
+                    <p class="quote">Kata-words hari ini. Yang sudah selesai, boleh pulang.</p>
                 </div>
 
                 <div class="alumni-card">
@@ -433,6 +584,56 @@
 
 
     </main>
+    
+    <footer class="main-footer">
+        <div class="footer-content">
+            
+            <div class="footer-col homeschooling">
+                <div class="footer-logo-kurikulum">
+                    <img src="Logo HSCC Genap - Copy.png" alt="Logo HSCC">
+                    <img src="kurikulum merdeka.png" alt="Kurikulum Merdeka"> 
+                </div>
+                <h3>HOMESCHOOLING CARNATION CIREBON</h3>
+
+                <ul class="alamat-utama">
+                    <li>
+                        <i class="fa-solid fa-location-dot"></i>
+                        <p>HSCC 1, Jl. Ciremai Raya No. E 12 Perumnas Kelurahan Kecapi, RT.02/RW.18, Larangan Selatan, Harjamukti, Cirebon City, West Java 45142, Indonesia</p>
+                    </li>
+                </ul>
+                
+                <ul>
+                    <li>
+                        <i class="fa-solid fa-location-dot"></i>
+                        <p>HSCC 2, RUKO BERRY GREEN KOMPLEK CSB MAL. 21, Kota Cirebon, Jawa Barat 45131, Indonesia</p>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>PINTASAN</h3>
+                <ul>
+                    <li><a href="tentang.php">Tentang Kami</a></li>
+                    <li><a href="/pendaftaran">Info Pendaftaran</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>IKUTI KAMI</h3>
+                <ul class="social-links">
+                    <li><a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fa-brands fa-tiktok"></i> Tiktok</a></li>
+                    <li><a href="#"><i class="fa-brands fa-youtube"></i> Youtube</a></li>
+                </ul>
+            </div>
+
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 Homeschooling Carnation Cirebon. All Rights Reserved.
+        </div>
+        
+    </footer>
     
 </body>
 </html>
