@@ -1,48 +1,50 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Homeschooling Carnation')</title>
+    <title>Tentang Homeschooling - Carnation Cirebon</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Pacifico&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Pacifico&family=Poppins:wght@400;400;600;600;700&display=swap" rel="stylesheet">
+
 
     <style>
         /* --- Reset & Pengaturan Dasar --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background-color: #f4f4f8; min-height: 100vh; }
-        
-        /* =====================================
-           WRAPPER AGAR HEADER & NAVBAR STICKY
-        ===================================== */
-        .sticky-header-wrapper {
-            position: sticky;
-            top: 0;
-            z-index: 1000; /* Pastikan di atas elemen lain */
-            width: 100%;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Efek melayang */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        /* =====================================
-           1. HEADER UTAMA (MERAH)
-        ===================================== */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f8; 
+            min-height: 100vh;
+        }
+        
+        header {
+            width: 100%;
+        }
+
+        /* (CSS TOP HEADER DAN NAVBAR TIDAK BERUBAH) */
+        
         .top-header {
             background-color: #d11e1f; 
             color: #ffffff;
-            padding: 2.5rem 1.5rem; 
+            padding: 1.2rem 1.5rem; 
             display: flex;
             align-items: center; 
             position: relative; 
-            /* Border bawah dihapus/disesuaikan karena ada navbar di bawahnya */
-            border-bottom: 4px solid #a81819; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            border-bottom: 5px solid #a81819; 
         }
 
         .top-header .logo {
-            width: 85px; 
-            height: 85px; 
+            width: 60px; 
+            height: 60px;
             flex-shrink: 0; 
             z-index: 2; 
         }
@@ -54,243 +56,383 @@
             transform: translate(-50%, -50%); 
             text-align: center; 
             width: 100%; 
-            padding: 0 120px; 
+            padding: 0 100px; 
             box-sizing: border-box;
             z-index: 1;
         }
 
         .top-header h3 {
-            font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 400; margin: 0; line-height: 1; margin-bottom: 8px; letter-spacing: 1.5px;
-        }
-        .top-header h2 {
-            font-family: 'Oswald', sans-serif; font-size: 2.2rem; font-weight: 700; margin: 0; line-height: 1.1;
-        }
-        .top-header .tagline {
-            font-family: 'Pacifico', cursive; font-size: 1.1rem; font-weight: 400; margin-top: 8px; opacity: 0.95;
+            font-family: 'Poppins', sans-serif; 
+            font-size: 0.8rem; 
+            font-weight: 400;
+            margin: 0;
+            line-height: 1;
+            margin-bottom: 5px; 
         }
 
-        /* =====================================
-           2. NAVBAR BERSIH (PUTIH)
-        ===================================== */
+        .top-header h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.6rem; 
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.1;
+        }
+
+        .top-header .tagline {
+            font-family: 'Pacifico', cursive; 
+            font-size: 1rem; 
+            font-weight: 400;
+            margin-top: 5px;
+        }
+        
+        /* == NAVBAR (PUTIH) == */
         .navbar {
             background-color: #ffffff;
-            /* Shadow dipindah ke sticky-wrapper */
-            /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */ 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+            display: flex;
+            justify-content: center; 
+            align-items: center;
             padding: 0.75rem 2rem;
-            /* Position sticky dihapus dari sini karena sudah di wrapper */
-        }
-
-        .navbar-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 1.5rem; 
-            align-items: center;
-        }
-
-        /* --- PERBAIKAN JARAK TOMBOL LOGIN & REGISTER --- */
-        .nav-auth {
-            display: flex;
-            gap: 2rem; /* JARAK DIPERLEBAR (Dari 1rem ke 2rem) */
-            align-items: center;
-        }
-
-        .nav-menu a {
-            text-decoration: none; color: #222; font-weight: 600; font-size: 1rem;
-            padding: 0.5rem 0; border-bottom: 3px solid transparent;
-            transition: all 0.3s ease;
+            margin-top: 0; 
+            position: static; 
+            z-index: 100;
         }
         
-        .nav-menu a:hover, .nav-menu a.active {
-            color: #d11e1f; border-bottom-color: #d11e1f;
+        .navbar .nav-links {
+            display: flex;
+            gap: 0; 
         }
 
-        /* Style Auth Buttons */
-        .nav-auth a.login-btn { 
-            text-decoration: none; background-color: #4A90E2; color: white; 
-            padding: 0.6rem 2rem; /* Padding sedikit ditambah */
-            border-radius: 50px; font-weight: 600; transition: 0.3s;
+        .navbar .nav-links a {
+            text-decoration: none;
+            color: #222; 
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.5rem 1.2rem; 
+            border-bottom: 3px solid transparent;
+            transition: color 0.3s ease, border-color 0.3s ease;
         }
-        .nav-auth a.login-btn:hover { background-color: #357ABD; transform: translateY(-2px); }
         
-        .nav-auth a.register-btn {
-            text-decoration: none; color: #4A90E2; border: 2px solid #4A90E2;
-            padding: 0.5rem 1.8rem; /* Padding sedikit ditambah */
-            border-radius: 50px; font-weight: 600; transition: 0.3s;
+        .navbar .nav-links a:hover,
+        .navbar .nav-links a.active {
+            color: #d11e1f; 
+            border-bottom-color: #d11e1f;
         }
-        .nav-auth a.register-btn:hover { background-color: #4A90E2; color: white; }
 
-        .nav-auth button.logout-btn { 
-            background: none; border: 2px solid #dc3545; color: #dc3545; 
-            padding: 0.4rem 1.2rem; border-radius: 50px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Poppins', sans-serif;
+        /* == KONTEN UTAMA == */
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto; 
+            padding: 0 1.5rem;
         }
-        .nav-auth button.logout-btn:hover { background-color: #dc3545; color: white; }
+        
+        /* =====================================
+        == STYLING UMUM BLOK (PERBAIKAN TATA LETAK HORIZONTAL)
+        ===================================== */
+        .about-section h1, .kurikulum-section h1, .legalitas-section h1 {
+            font-family: 'Poppins', sans-serif; 
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            /* Tambahkan margin atas untuk memberi jarak dari section sebelumnya */
+            margin-top: 3rem; 
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-block {
+            display: flex;
+            flex-wrap: nowrap; 
+            align-items: flex-start; 
+            
+            background-color: #e6f0ff; 
+            border: 1px solid #cce0ff; 
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .about-block img {
+            width: 350px; 
+            height: auto;
+            border-radius: 6px;
+            margin-right: 1.5rem;
+            object-fit: cover;
+            flex-shrink: 0; 
+            max-width: 40%; 
+        }
+        
+        /* Penyesuaian khusus untuk gambar Kurikulum Merdeka */
+        .about-block .img-kurikulum {
+            width: 150px; 
+            height: auto;
+            border-radius: 6px;
+            margin-right: 1.5rem;
+            margin-left: 0; 
+            align-self: center; 
+            flex-shrink: 0;
+        }
+        
+        .about-block p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #444;
+            flex-grow: 1; 
+        }
+        
+        /* Legalitas Content (Gambar Kanan, Teks Kiri) */
+        .legalitas-content {
+            display: flex;
+            flex-wrap: nowrap; 
+            background-color: #e6f0ff; 
+            border: 1px solid #cce0ff; 
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            align-items: center;
+        }
+        
+        .legalitas-list {
+            list-style: none;
+            padding-left: 0;
+            flex: 1;
+            min-width: 50%;
+        }
+        
+        .legalitas-list li {
+            font-size: 0.95rem;
+            line-height: 2.2;
+            color: #444;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .legalitas-image {
+            width: 250px;
+            height: auto;
+            margin-left: 1.5rem;
+            border-radius: 6px;
+            object-fit: cover;
+            flex-shrink: 0;
+            max-width: 35%; 
+        }
 
         /* =====================================
-           3. STYLE GLOBAL & FORMULIR
+        == PERBAIKAN: PROGRAM PENDIDIKAN (SAC & LOS)
         ===================================== */
-        .container { max-width: 1100px; margin: 2rem auto; padding: 0 1.5rem; }
-        .welcome-header { margin-bottom: 2rem; text-align: center; }
-        .welcome-header h1 { font-family: 'Oswald', sans-serif; font-size: 2.8rem; color: #222; font-weight: 700; text-transform: uppercase; }
-        .welcome-header p { font-family: 'Pacifico', cursive; font-size: 1.8rem; color: #444; margin-top: 0.5rem; }
-        .cta-section { display: flex; justify-content: center; gap: 2rem; margin-top: 3rem; }
-        .cta-button { padding: 1rem 3rem; border-radius: 50px; text-decoration: none; color: #ffffff; font-family: 'Oswald', sans-serif; font-size: 1.2rem; font-weight: 700; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); box-shadow: 0 5px 15px rgba(0,0,0,0.15); transition: transform 0.3s; }
-        .cta-button:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.25); }
-        .btn-red { background-color: #ff0000; } .btn-green { background-color: #00c853; }
+        .program-pendidikan {
+            margin-top: 3rem;
+            position: relative;
+            margin-bottom: 3rem;
+        }
+        
+        .program-pendidikan h4 {
+            /* KUNCI PERBAIKAN: Pindahkan ke KIRI (right: auto dan tambahkan left: 0) */
+            position: absolute;
+            top: -1.5rem; 
+            left: 0; 
+            right: auto; /* Hilangkan posisi kanan */
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #333;
+        }
 
-        /* Form Styles */
-        .form-container { width: 90%; max-width: 750px; background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); overflow: hidden; margin: 2rem auto; }
-        .form-header { background-color: #d90429; color: white; padding: 1.5rem; text-align: center; position: relative; }
-        .form-header.trial { background-color: #00b4d8; }
-        .form-header h2 { margin: 0; font-weight: 700; font-size: 1.5rem; }
-        .back-link { position: absolute; top: 50%; left: 1.5rem; transform: translateY(-50%); color: white; text-decoration: none; font-weight: 600; padding: 5px 10px; border-radius: 5px; transition: 0.3s; }
-        .back-link:hover { background-color: rgba(0,0,0,0.2); }
+        .program-grid {
+            display: flex;
+            gap: 20px;
+            flex-wrap: nowrap; 
+            justify-content: space-between;
+        }
 
-        .progress-bar { display: flex; justify-content: space-between; padding: 1.5rem 2rem; border-bottom: 1px solid #ddd; }
-        .progress-step { display: flex; flex-direction: column; align-items: center; font-size: 0.8rem; color: #aaa; width: 25%; text-align: center; }
-        .progress-step.trial { width: 50%; }
-        .step-number { width: 30px; height: 30px; border-radius: 50%; background-color: #eee; border: 2px solid #ddd; display: flex; justify-content: center; align-items: center; font-weight: 600; margin-bottom: 0.5rem; }
-        .progress-step.active { color: #d90429; }
-        .progress-step.active.trial { color: #00b4d8; }
-        .progress-step.active .step-number { background-color: #d90429; color: white; border-color: #d90429; }
-        .progress-step.active.trial .step-number { background-color: #00b4d8; border-color: #00b4d8; }
-
-        form { padding: 2rem; }
-        .form-step { display: none; }
-        .form-step.active { display: block; animation: fadeIn 0.5s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .input-group { margin-bottom: 1.25rem; }
-        .input-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #555; }
-        .input-group input, .input-group select, .input-group textarea { width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem; font-family: 'Poppins', sans-serif; background-color: #fafafa; transition: border-color 0.3s ease; }
-        .input-group input:focus, .input-group select:focus, .input-group textarea:focus { outline: none; border-color: #4A90E2; box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1); }
-        .form-row { display: flex; gap: 1.5rem; }
-        .form-row .input-group { width: 50%; }
-
-        .button-group { display: flex; justify-content: space-between; margin-top: 2rem; }
-        .btn { padding: 0.75rem 2rem; border: none; border-radius: 5px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; color: white; display: inline-block; text-align: center; }
-        .btn-prev { background-color: #aaa; } .btn-prev:hover { background-color: #888; transform: translateY(-2px); }
-        .btn-next { background-color: #4A90E2; } .btn-next:hover { background-color: #357ABD; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3); }
-        .btn-next:disabled, .btn-next.disabled { background-color: #ccc; cursor: not-allowed; transform: none; box-shadow: none; opacity: 0.7; }
-        .btn-submit { background-color: #28a745; } .btn-submit:hover { background-color: #218838; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3); }
-
-        .input-error { border-color: #d32f2f !important; background-color: #fff8f8; }
-        .client-error { color: #d32f2f; font-size: 0.85rem; margin-top: 4px; min-height: 18px; }
-        .server-error { color: #d32f2f; font-size: 0.85rem; margin-top: 4px; font-weight: bold; }
-
-        /* Auth Page Specifics */
-        .auth-page-body { display: flex; justify-content: center; align-items: center; min-height: 80vh; }
-        .login-container, .register-container { background-color: #ffffff; padding: 2.5rem; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); width: 90%; max-width: 400px; margin: 0 auto; }
-        .register-container { max-width: 450px; }
-        .login-container h2, .register-container h2 { text-align: center; color: #333; margin-bottom: 2rem; }
-        .login-button, .register-button { width: 100%; padding: 0.75rem; border: none; border-radius: 5px; font-weight: 600; cursor: pointer; color: white; transition: 0.3s; }
-        .login-button { background-color: #4A90E2; } .register-button { background-color: #28a745; }
-        .separator { display: flex; align-items: center; text-align: center; color: #aaa; margin: 1.5rem 0; }
-        .separator::before, .separator::after { content: ''; flex: 1; border-bottom: 1px solid #ddd; }
-        .separator span { padding: 0 0.75rem; font-size: 0.9rem; }
-        .google-login-button { display: flex; justify-content: center; align-items: center; width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; background-color: white; color: #555; font-weight: 600; text-decoration: none; }
-        .google-logo { width: 20px; margin-right: 10px; }
-        .links, .footer-link { display: flex; justify-content: space-between; margin-top: 1.5rem; }
-        .footer-link { justify-content: center; }
-        .links a, .footer-link a { color: #4A90E2; text-decoration: none; font-size: 0.9rem; }
-        .consent-group { display: flex; align-items: flex-start; margin-top: 1.5rem; margin-bottom: 1.5rem; }
-        .consent-group input { width: auto; margin-right: 0.5rem; }
-
-        /* Responsive */
+        .program-card {
+            background-color: #e6f0ff; 
+            border: 1px solid #cce0ff; 
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            flex: 1 1 48%; 
+        }
+        
+        /* (CSS Visi Misi, Legalitas, Pengajar, Alumni lainnya tidak berubah) */
+        .visi-misi-block {background-color: #e6f0ff; border: 1px solid #cce0ff; border-radius: 8px; padding: 1.5rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); position: relative;} .visi-misi-block h4 {font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 700; color: #000; text-align: center; margin-bottom: 0.5rem; padding-top: 10px;} .visi-misi-block .label {font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 700; color: #333; text-align: center; margin-bottom: 0.5rem;} .visi-misi-block .visi-text {text-align: center; font-style: italic; font-size: 1rem; color: #555; margin-bottom: 2rem; padding: 0 1rem;} .visi-misi-block .misi-list {list-style: none; padding-left: 0;} .visi-misi-block .misi-list li {font-size: 0.95rem; line-height: 1.8; color: #444; padding-left: 1.5rem; position: relative;} .visi-misi-block .misi-list li::before {content: '•'; color: #333; font-weight: bold; display: inline-block; width: 1em; margin-left: -1em;} .visi-misi-title {position: absolute; top: 10px; right: 1.5rem; font-size: 0.9rem; font-weight: 600; color: #333;} .legalitas-list li::before {content: '✓'; color: #1e90ff; font-weight: bold; display: inline-block; width: 1em; margin-left: -1em;} .tenaga-pengajar-section {margin-top: 3rem; margin-bottom: 3rem; position: relative;} .tenaga-pengajar-section h4 {position: absolute; top: -0.5rem; right: 0; font-size: 0.9rem; font-weight: 600; color: #333;} .pengajar-grid {background-color: #ffffff; border: 1px solid #cce0ff; border-radius: 8px; padding: 2rem 1.5rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5rem; justify-items: center;} .pengajar-card {text-align: center; display: flex; flex-direction: column; align-items: center;} .pengajar-card img {width: 80px; height: 80px; border-radius: 50%; border: 3px solid #e6f0ff; object-fit: cover; margin-bottom: 0.5rem;} .pengajar-card span {font-size: 0.8rem; font-weight: 600; color: #333; text-transform: uppercase;} .alumni-section {margin-top: 4rem;} .alumni-section h4 {font-family: 'Pacifico', cursive; font-size: 2rem; color: #333; text-align: center; margin-bottom: 2rem;} .alumni-grid {display: flex; gap: 20px; overflow-x: auto; padding-bottom: 1rem; justify-content: center;} .alumni-card {flex: 0 0 300px; background-color: #ffffff; border: 1px solid #cce0ff; border-radius: 8px; padding: 1rem; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); display: flex; flex-direction: column; min-height: 150px; margin-right: 1rem;} .alumni-card.large {flex: 0 0 450px; background-color: #e6f0ff;} .alumni-info {display: flex; align-items: center; margin-bottom: 0.5rem;} .alumni-info img {width: 50px; height: 50px; border-radius: 50%; margin-right: 10px; object-fit: cover;} .alumni-name-job span {display: block; font-size: 0.8rem; color: #666;} .alumni-card p.quote {font-size: 0.9rem; line-height: 1.5; color: #333; font-style: italic;}
+    
+        /* MEDIA QUERY */
         @media (max-width: 800px) {
-            .top-header { padding: 0.75rem 1rem; flex-wrap: nowrap; gap: 10px; justify-content: flex-start; }
-            .top-header .logo { width: 45px; height: 45px; margin: 0; }
-            .top-header .header-content { position: static; transform: none; left: auto; top: auto; text-align: left; padding: 0; width: auto; margin-left: 10px; }
-            .top-header h2 { font-size: 1.1rem; } .top-header h3, .top-header .tagline { font-size: 0.7rem; }
-            
-            /* Navbar Mobile */
-            .navbar { padding: 0.5rem; }
-            .navbar-container { flex-direction: column; gap: 1rem; }
-            .nav-menu { flex-wrap: wrap; justify-content: center; gap: 1rem; }
-            .nav-auth { flex-wrap: wrap; justify-content: center; gap: 0.5rem; }
-            
-            .cta-section { flex-direction: column; gap: 1rem; } .cta-button { width: 80%; text-align: center; }
-            .form-row { flex-direction: column; gap: 0; } .form-row .input-group { width: 100%; }
-            .form-header { padding-top: 3.5rem; padding-bottom: 1rem; }
+            .about-block, .legalitas-content {flex-direction: column; flex-wrap: wrap; padding: 1rem;}
+            .about-block img {width: 100%; margin-right: 0; margin-bottom: 1rem; max-width: 100%;} 
+            .legalitas-content {flex-direction: column-reverse;}
+            .legalitas-image {width: 100%; margin: 0 auto 1rem 0; max-width: 100%;}
+            .program-grid {flex-direction: column; flex-wrap: wrap; gap: 15px;}
+            .program-card {min-width: 100%;}
+            .top-header {padding: 0.75rem 1rem; flex-wrap: nowrap; gap: 10px; position: relative;} .top-header .logo {width: 45px; height: 45px; margin: 0;} .top-header .header-content {position: static; transform: none; left: auto; top: auto; text-align: left; padding: 0; width: auto; margin-left: 10px;} .top-header h2 {font-size: 1.1rem;} .top-header h3, .top-header .tagline {font-size: 0.7rem;} .navbar {padding: 0.5rem 0.5rem;} .navbar .nav-links a {font-size: 0.8rem; padding: 0.5rem 0.5rem;} .container {margin-top: 1rem;} .pengajar-grid {grid-template-columns: repeat(3, 1fr); gap: 1rem;} .pengajar-card img {width: 60px; height: 60px;} .alumni-grid {justify-content: flex-start; padding: 0 1rem;} .alumni-card {flex: 0 0 250px;} .alumni-card.large {flex: 0 0 350px;}
         }
     </style>
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+<body>
 
-<body class="@yield('body-class')">
-
-    <div class="sticky-header-wrapper">
-        
-        <header>
-            <div class="top-header">
-                <a href="{{ route('home') }}">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo HSCC" class="logo">
-                </a>
-                <div class="header-content">
-                    <h3>SELAMAT DATANG DI WEBSITE</h3> 
-                    <h2>HOMESCHOOLING CARNATION CIREBON</h2>
-                    <p class="tagline">"Menyenangkan, Cerdas, dan Sukses"</p>
-                </div>
+    <header>
+        <div class="top-header">
+            <img src="Logo HSCC Genap - Copy.png" alt="Logo HSCC" class="logo">
+            <div class="header-content">
+                <h3>SELAMAT DATANG DI WEBSITE</h3> 
+                <h2>HOMESCHOOLING CARNATION CIREBON</h2>
+                <p class="tagline">"Menyenangkan, Cerdas, dan Sukses"</p>
             </div>
-        </header>
-
-        <nav class="navbar">
-            <div class="navbar-container">
-                <div class="nav-menu">
-                    <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
-                    <a href="{{ route('daftar.online') }}" class="{{ request()->routeIs('daftar.*') ? 'active' : '' }}">Pendaftaran</a>
-                    <a href="#">Tentang Kami</a>
-                </div>
-
-                <div class="nav-auth">
-                    @auth
-                        <span style="color: #666; font-weight: 600; font-size: 0.9rem;">
-                            Halo, {{ Auth::user()->name }}
-                        </span>
-                        <form method="POST" action="{{ route('logout') }}" style="display: inline;">
-                            @csrf
-                            <button type="submit" class="logout-btn">Logout</button>
-                        </form>
-                    @else
-                        <a href="{{ route('login') }}" class="login-btn">Login</a>
-                        <a href="{{ route('register') }}" class="register-btn">Daftar Akun</a>
-                    @endauth
-                </div>
-            </div>
-        </nav>
-
-    </div> @if (session('status'))
-    <div class="container" style="margin-bottom: -1rem; margin-top: 1rem;">
-        <div style="background-color: #d4edda; color: #155724; border-color: #c3e6cb; padding: 1rem; border-radius: 5px; text-align: center; font-weight: 600;">
-            {{ session('status') }}
         </div>
-    </div>
-    @endif
+    </header>
 
-    <main>
-        @yield('content')
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="tentang.php" class="active">Tentang</a>
+            <a href="/ebook">E-book</a>
+            <a href="/pendaftaran">Pendaftaran</a>
+            <a href="/kontak">Kontak</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        
+        <section class="about-section">
+            <h1>TENTANG HOMESCHOOLING</h1>
+
+            <div class="about-block">
+                <img src="aktivitas.png" alt="Aktivitas Belajar Homeschooling">
+                
+                <p>
+                    Homeschooling adalah sistem pendidikan di mana anak-anak belajar di rumah dengan bimbingan orang tua atau tutor profesional. Metode ini menawarkan fleksibilitas tinggi dalam penyesuaian kurikulum, jadwal, dan cara belajar sesuai kebutuhan anak. Dengan lingkungan yang nyaman dan dukungan keluarga, homeschooling membantu anak belajar lebih efektif sekaligus mengembangkan kemampuan sosial dan akademis.
+                </p>
+            </div>
+        </section>
+
+
+        <section class="visi-misi-section">
+            <div class="visi-misi-block">
+                
+                <h4 class="label">VISI</h4>
+                <p class="visi-text">
+                    "TERWUJUDNYA GENERASI CERDAS, BERKARAKTER DAN MEMILIKI LIFE SKILLS DALAM LINGKUNGAN PENDIDIKAN YANG RAMAH DAN KONDUSIF."
+                </p>
+
+                <h4 class="label">MISI</h4>
+                <ul class="misi-list">
+                    <li>Mewujudkan peserta didik dengan kemampuan sesuai standar kurikulum merdeka.</li>
+                    <li>Menumbuhkan peserta didik yang memiliki nilai-nilai budaya disiplin dan berkarakter.</li>
+                    <li>Mengembangkan potensi keterampilan peserta didik sesuai minat dan bakat.</li>
+                    <li>Mewujudkan lingkungan belajar dengan konsep Home Sweet Home.</li>
+                    <li>Menyediakan layanan pendidikan dengan rasio siswa per kelas 1:10.</li>
+                    <li>Memberikan hak belajar yang sama bagi siswa dengan kondisi berkebutuhan khusus.</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="kurikulum-section">
+            <h1>KURIKULUM & PENDIDIKAN</h1>
+
+            <div class="about-block">
+                 <img src="kurikulum merdeka.png" alt="Logo Kurikulum Merdeka" class="img-kurikulum">
+
+                <p>
+                    Sebagai lembaga pendidikan non formal, HSCC menyelenggarakan pendidikan kesetaraan di semua jenjang, mulai dari SD hingga SMA. Kami menawarkan paket A setara SD, paket B setara SMP, dan paket C setara SMA dengan dua pilihan jurusan, yaitu IPA dan IPS. Lulusan HSCC memiliki kesempatan untuk melanjutkan pendidikan ke sekolah formal hingga perguruan tinggi.
+                </p>
+            </div>
+            
+            <div class="program-pendidikan">
+                <h4>PROGRAM PENDIDIKAN HSCC</h4>
+                <div class="program-grid">
+                    
+                    <div class="program-card">
+                        <h5>STUDY AT CLASS (SAC)</h5>
+                        <p>
+                            Program ini memungkinkan siswa belajar bersama di Gedung HSCC setiap Senin–Kamis pukul 08.10–11.30 WIB. Dengan maksimal 10 siswa per kelompok, pembelajaran lebih intensif dan personal.
+                        </p>
+                    </div>
+                    
+                    <div class="program-card">
+                        <h5>LEARNING ON SITE (LOS)</h5>
+                        <p>
+                            Program ini menyediakan tutor yang datang ke rumah dengan jadwal fleksibel sesuai kebutuhan orang tua. Pembelajaran berlangsung 2–3 kali per minggu.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="legalitas-section">
+            <h1>LEGALITAS</h1>
+            
+            <div class="legalitas-content">
+                <ul class="legalitas-list">
+                    <li>Sudah masuk ke dalam Dinas Pendidikan Kota Cirebon</li>
+                    <li>Sudah memiliki NPSN (Nomor Pokok Sekolah Nasional)</li>
+                    <li>Ijazah sudah diakui</li>
+                    <li>Terakreditasi BAN-PAUD-PNF</li>
+                </ul>
+                <img src="siswa dengan legalitas.png" alt="Siswa dengan Bukti Legalitas" class="legalitas-image">
+            </div>
+        </section>
+        
+        
+        <section class="tenaga-pengajar-section">
+            <h4>TENAGA PENGAJAR</h4>
+
+            <div class="pengajar-grid">
+                <div class="pengajar-card"> <img src="foto_guru_placeholder.jpg" alt="Foto Guru 1"> <span>NAME IS</span> </div>
+                <div class="pengajar-card"> <img src="foto_guru_placeholder.jpg" alt="Foto Guru 2"> <span>NAME IS</span> </div>
+                <div class="pengajar-card"> <img src="foto_guru_placeholder.jpg" alt="Foto Guru 3"> <span>NAME IS</span> </div>
+                <div class="pengajar-card"> <img src="foto_guru_placeholder.jpg" alt="Foto Guru 4"> <span>NAME IS</span> </div>
+                <div class="pengajar-card"> <img src="foto_guru_placeholder.jpg" alt="Foto Guru 5"> <span>NAME IS</span> </div>
+                <div class="pengajar-card"> <img src="foto_guru_placeholder.jpg" alt="Foto Guru 6"> <span>NAME IS</span> </div>
+                <div class="pengajar-card"> <img src="foto_guru_placeholder.jpg" alt="Foto Guru 7"> <span>NAME IS</span> </div>
+                <div class="pengajar-card"> <img src="foto_guru_placeholder.jpg" alt="Foto Guru 8"> <span>NAME IS</span> </div>
+                <div class="pengajar-card"> <img src="foto_guru_placeholder.jpg" alt="Foto Guru 9"> <span>NAME IS</span> </div>
+                <div class="pengajar-card"> <img src="foto_guru_placeholder.jpg" alt="Foto Guru 10"> <span>NAME IS</span> </div>
+            </div>
+        </section>
+
+
+        <section class="alumni-section">
+            <h4>Apa kata alumni?</h4>
+
+            <div class="alumni-grid">
+                
+                <div class="alumni-card">
+                    <div class="alumni-info">
+                        <img src="foto_guru_placeholder.jpg" alt="Foto Alumni 1">
+                        <div class="alumni-name-job">
+                            <span>NAME IS</span>
+                            <span>Jabatan/Job saat ini</span>
+                        </div>
+                    </div>
+                    <p class="quote">Kata-kata hari ini. Yang sudah selesai, boleh pulang.</p>
+                </div>
+                
+                <div class="alumni-card large">
+                    <div class="alumni-info">
+                        <img src="foto_guru_placeholder.jpg" alt="Foto Alumni 2">
+                        <div class="alumni-name-job">
+                            <span>NAME IS</span>
+                            <span>Universitas/Job saat ini</span>
+                        </div>
+                    </div>
+                    <p class="quote">Kata-kata hari ini. Yang sudah selesai, boleh pulang.</p>
+                </div>
+
+                <div class="alumni-card">
+                    <div class="alumni-info">
+                        <img src="foto_guru_placeholder.jpg" alt="Foto Alumni 3">
+                        <div class="alumni-name-job">
+                            <span>NAME IS</span>
+                            <span>Universitas/Job saat ini</span>
+                        </div>
+                    </div>
+                    <p class="quote">Kata-kata hari ini. Yang sudah selesai, boleh pulang.</p>
+                </div>
+
+            </div>
+        </section>
+
+
     </main>
-
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/assets/css/chat.min.css">
-    <script>
-        var botmanWidget = {
-            aboutText: 'Homeschooling Carnation',
-            introMessage: "Halo! 👋 Saya asisten virtual Homeschooling Carnation. Ketik 'halo' untuk memulai!",
-            title: 'Bantuan Pendaftaran',
-            mainColor: '#d90429',
-            bubbleBackground: '#d90429',
-            headerTextColor: '#fff',
-            desktopHeight: 450, desktopWidth: 370
-        };
-    </script>
-    <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
-
+    
 </body>
 </html>

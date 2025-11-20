@@ -114,6 +114,11 @@
             display: flex;
             gap: 0; 
         }
+        .navbar .nav-links a:hover,
+        .navbar .nav-links a.active {
+            color: #d11e1f; 
+            border-bottom-color: #d11e1f;
+        }
 
         .navbar .nav-links a {
             text-decoration: none;
@@ -216,6 +221,7 @@
 
     <nav class="navbar">
         <div class="nav-links">
+            <a href="#" class="active">Dashboard</a>
             <a href="tentang.php">Tentang</a>
             <a href="/ebook">E-book</a>
             <a href="/pendaftaran">Pendaftaran</a>
