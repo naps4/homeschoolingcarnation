@@ -186,7 +186,7 @@
             <div class="nav-menu">
                 <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
                 <a href="{{ route('daftar.online') }}" class="{{ request()->routeIs('daftar.*') ? 'active' : '' }}">Pendaftaran</a>
-                <a href="#">Tentang Kami</a>
+                <a href="{{ route('tentang') }}" class="{{ request()->routeIs('tentang') ? 'active' : '' }}">Tentang Kami</a>
             </div>
 
             <div class="nav-auth">
