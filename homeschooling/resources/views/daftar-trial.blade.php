@@ -154,143 +154,76 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('trialForm');
-    const steps = Array.from(document.querySelectorAll('.form-step'));
-    const nextBtns = document.querySelectorAll('.btn-next');
-    const prevBtns = document.querySelectorAll('.btn-prev');
-    const progress = Array.from(document.querySelectorAll('.progress-step'));
-    let current = 0;
+    const formSteps = Array.from(document.querySelectorAll('.form-step'));
+    const progressSteps = Array.from(document.querySelectorAll('.progress-step'));
+    const nextButtons = document.querySelectorAll('.btn-next');
+    const prevButtons = document.querySelectorAll('.btn-prev');
+    
+    // AMBIL STEP DARI SERVER
+    let currentStep = Number("{{ session('active_step', 0) }}");
 
-    // regex rules aligned with controller
-    const RULES = {
-        letters: /^[A-Za-z\s]+$/,
-        lettersOptional: /^[A-Za-z\s]*$/,
-        school: /^[A-Za-z0-9\s\.\-\,&()]+$/,
-        numbers8to15: /^\d{8,15}$/,
-        numbersAny: /^[0-9]+$/
-    };
-
-    function showStep(i) {
-        steps.forEach((s, idx) => s.classList.toggle('active', idx === i));
-        progress.forEach((p, idx) => p.classList.toggle('active', idx <= i));
-        current = i;
+    function showStep(stepIndex) {
+        formSteps.forEach((step, index) => {
+            step.classList.toggle('active', index === stepIndex);
+        });
+        progressSteps.forEach((step, index) => {
+            // Trial cuma 2 step, logic simple
+            step.classList.toggle('active', index <= stepIndex);
+        });
+        currentStep = stepIndex;
     }
 
-    function setError(input, msg) {
-        input.classList.add('input-error');
-        const box = input.parentNode.querySelector('.client-error');
-        if (box) box.innerText = msg;
+    function validateStep(stepIndex) {
+        const currentStepEl = formSteps[stepIndex];
+        const inputs = currentStepEl.querySelectorAll('input[required], select[required], textarea[required]');
+        let isValid = true;
+
+        inputs.forEach(input => {
+            const errorBox = input.parentNode.querySelector('.client-error');
+            input.classList.remove('input-error');
+            if(errorBox) errorBox.innerText = "";
+
+            if (!input.value.trim()) {
+                input.classList.add('input-error');
+                if(errorBox) errorBox.innerText = "Wajib diisi";
+                isValid = false;
+            }
+        });
+        return isValid;
     }
 
-    function clearError(input) {
-        input.classList.remove('input-error');
-        const box = input.parentNode.querySelector('.client-error');
-        if (box) box.innerText = '';
-    }
-
-    function validateInput(input) {
-        const name = input.name;
-        const val = (input.value || '').trim();
-
-        // required
-        if (input.hasAttribute('required') && val === '') {
-            setError(input, 'Field ini wajib diisi.');
-            return false;
-        }
-
-        // pattern native browser (if provided) will also check on submit but we enforce here:
-        if (name === 'nama_lengkap') {
-            if (!RULES.letters.test(val)) { setError(input, 'Nama hanya huruf dan spasi.'); return false; }
-        }
-        if (name === 'nama_panggilan') {
-            if (val !== '' && !RULES.lettersOptional.test(val)) { setError(input, 'Nama panggilan hanya huruf dan spasi.'); return false; }
-        }
-        if (name === 'asal_sekolah') {
-            if (!RULES.school.test(val)) { setError(input, 'Asal sekolah mengandung karakter tidak valid.'); return false; }
-        }
-        if (name === 'nama_orangtua') {
-            if (!RULES.letters.test(val)) { setError(input, 'Nama orang tua hanya huruf dan spasi.'); return false; }
-        }
-        if (name === 'telp_hp_ortu') {
-            if (!RULES.numbers8to15.test(val)) { setError(input, 'Nomor telepon harus 8-15 digit angka.'); return false; }
-        }
-        if (input.tagName.toLowerCase() === 'select' && input.hasAttribute('required')) {
-            if (val === '') { setError(input, 'Silakan pilih opsi.'); return false; }
-        }
-
-        clearError(input);
-        return true;
-    }
-
-    function validateStep(i) {
-        const inputs = Array.from(steps[i].querySelectorAll('input,select,textarea'));
-        let ok = true;
-        for (const input of inputs) {
-            if (!validateInput(input)) ok = false;
-        }
-        return ok;
-    }
-
-    // real-time validation
-    form.addEventListener('input', (e) => {
-        const t = e.target;
-        if (!t) return;
-        if (['INPUT','SELECT','TEXTAREA'].includes(t.tagName)) validateInput(t);
-    });
-
-    nextBtns.forEach(btn => {
+    nextButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            if (validateStep(current)) {
-                if (current < steps.length - 1) showStep(current + 1);
-            } else {
-                const first = steps[current].querySelector('.input-error');
-                if (first) first.scrollIntoView({ behavior:'smooth', block:'center' });
+            if (validateStep(currentStep)) {
+                if (currentStep < formSteps.length - 1) {
+                    showStep(currentStep + 1);
+                }
             }
         });
     });
 
-    prevBtns.forEach(btn => {
+    prevButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            if (current > 0) showStep(current - 1);
+            if (currentStep > 0) {
+                showStep(currentStep - 1);
+            }
         });
     });
 
-    // on submit, validate all steps
-    form.addEventListener('submit', (e) => {
-        for (let i = 0; i < steps.length; i++) {
-            if (!validateStep(i)) {
-                e.preventDefault();
-                showStep(i);
-                const first = steps[i].querySelector('.input-error');
-                if (first) first.scrollIntoView({ behavior:'smooth', block:'center' });
-                return false;
-            }
-        }
-        // allow submit (server-side validation will also run)
-    });
-
-    // jika ada error server-side dari Laravel, highlight dan buka step yang mengandung error
-    const serverErrors = {!! json_encode($errors->keys() ?? []) !!};
+    // Highlight Server Errors
+    const serverErrors = JSON.parse('{!! json_encode($errors->keys() ?? []) !!}');
+    
     if (Array.isArray(serverErrors) && serverErrors.length > 0) {
-        serverErrors.forEach(name => {
-            const el = document.querySelector('[name="'+name+'"]');
-            if (el) {
-                setError(el, document.querySelector('[name="'+name+'"]').getAttribute('title') || 'Silakan perbaiki field ini.');
-            }
-        });
-
-        // buka step berisi error pertama
-        const first = serverErrors[0];
-        for (let i = 0; i < steps.length; i++) {
-            if (steps[i].querySelector('[name="'+first+'"]')) {
+        const firstErrorField = serverErrors[0];
+        for (let i = 0; i < formSteps.length; i++) {
+            if (formSteps[i].querySelector(`[name="${firstErrorField}"]`)) {
                 showStep(i);
                 break;
             }
         }
+    } else {
+        showStep(currentStep);
     }
-
-    // initialize
-    showStep(0);
 });
 </script>
 
