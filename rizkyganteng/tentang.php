@@ -23,9 +23,11 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f4f4f8; 
+            /* Latar belakang gradasi lembut agar lebih berwarna */
+            background: linear-gradient(135deg, #e6f0ff 0%, #fff0f5 50%, #fffdf0 100%);
             min-height: 100vh;
             padding-bottom: 0; 
+            overflow-x: hidden; 
         }
         
         header {
@@ -96,7 +98,8 @@
             align-items: center;
             padding: 0.75rem 2rem;
             margin-top: 0; 
-            position: static; 
+            position: sticky; 
+            top: 0;
             z-index: 100;
         }
         
@@ -121,6 +124,115 @@
             border-bottom-color: #d11e1f;
         }
 
+        /* =========================================
+           CSS HERO SECTION (BANNER)
+           ========================================= */
+        .hero-banner {
+            /* Background gradasi banner */
+            background: linear-gradient(105deg, #fff0f0 0%, #fff5f5 40%, #f0f4ff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4rem 10%; 
+            min-height: 85vh; 
+            position: relative;
+        }
+
+        .hero-text {
+            flex: 1;
+            max-width: 600px;
+            z-index: 10;
+            padding-right: 20px;
+        }
+
+        .hero-subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 5px;
+            color: #3b5d8f; 
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-family: 'Pacifico', cursive; 
+            font-size: 3rem;
+            line-height: 1.4;
+            margin-bottom: 1.5rem;
+            color: #333;
+            text-shadow: 2px 2px 0px rgba(255,255,255,0.5);
+        }
+
+        /* Warna-warni huruf judul */
+        .t-pink { color: #ff6b8b; }
+        .t-blue { color: #4d79ff; }
+        .t-purple { color: #a64dff; }
+
+        .hero-desc {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-style: italic;
+            border-left: 4px solid #d11e1f;
+            padding-left: 15px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-daftar-hero {
+            background-color: #a80000;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(168, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+        .btn-tentang-hero {
+            background-color: rgba(255,255,255,0.6);
+            border: 2px solid #e0e0e0;
+            color: #555;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-daftar-hero:hover, .btn-tentang-hero:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Kolom Gambar */
+        .hero-image {
+            flex: 1; 
+            display: flex;
+            justify-content: flex-end; 
+            align-items: flex-end; 
+            position: relative;
+            min-width: 0; 
+            gap: 0; 
+        }
+        
+        .hero-image img {
+            max-width: 48%; 
+            height: auto;
+            max-height: 500px; 
+            filter: drop-shadow(10px 10px 20px rgba(0,0,0,0.15)); 
+            object-fit: contain;
+        }
+
+        /* =========================================
+           AKHIR CSS HERO SECTION
+           ========================================= */
+
+
         /* == KONTEN UTAMA == */
         .container {
             max-width: 1000px;
@@ -128,9 +240,7 @@
             padding: 0 1.5rem;
         }
         
-        /* =====================================
-        == STYLING UMUM BLOK KONTEN
-        ===================================== */
+        /* == STYLING UMUM BLOK KONTEN == */
         .about-section h1, .kurikulum-section h1, .legalitas-section h1 {
             font-family: 'Poppins', sans-serif; 
             font-size: 1.2rem;
@@ -144,7 +254,6 @@
             display: flex;
             flex-wrap: nowrap; 
             align-items: flex-start; 
-            
             background-color: #e6f0ff; 
             border: 1px solid #cce0ff; 
             border-radius: 8px;
@@ -252,9 +361,7 @@
         /* Visi Misi, Legalitas, Pengajar, Alumni */
         .visi-misi-block {background-color: #e6f0ff; border: 1px solid #cce0ff; border-radius: 8px; padding: 1.5rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); position: relative;} .visi-misi-block h4 {font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 700; color: #000; text-align: center; margin-bottom: 0.5rem; padding-top: 10px;} .visi-misi-block .label {font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 700; color: #333; text-align: center; margin-bottom: 0.5rem;} .visi-misi-block .visi-text {text-align: center; font-style: italic; font-size: 1rem; color: #555; margin-bottom: 2rem; padding: 0 1rem;} .visi-misi-block .misi-list {list-style: none; padding-left: 0;} .visi-misi-block .misi-list li {font-size: 0.95rem; line-height: 1.8; color: #444; padding-left: 1.5rem; position: relative;} .visi-misi-block .misi-list li::before {content: '•'; color: #333; font-weight: bold; display: inline-block; width: 1em; margin-left: -1em;} .visi-misi-title {position: absolute; top: 10px; right: 1.5rem; font-size: 0.9rem; font-weight: 600; color: #333;} .legalitas-list li::before {content: '✓'; color: #1e90ff; font-weight: bold; display: inline-block; width: 1em; margin-left: -1em;} .tenaga-pengajar-section {margin-top: 3rem; margin-bottom: 3rem; position: relative;} .tenaga-pengajar-section h4 {position: absolute; top: -0.5rem; right: 0; font-size: 0.9rem; font-weight: 600; color: #333;} .pengajar-grid {background-color: #ffffff; border: 1px solid #cce0ff; border-radius: 8px; padding: 2rem 1.5rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5rem; justify-items: center;} .pengajar-card {text-align: center; display: flex; flex-direction: column; align-items: center;} .pengajar-card img {width: 80px; height: 80px; border-radius: 50%; border: 3px solid #e6f0ff; object-fit: cover; margin-bottom: 0.5rem;} .pengajar-card span {font-size: 0.8rem; font-weight: 600; color: #333; text-transform: uppercase;} .alumni-section {margin-top: 4rem;} .alumni-section h4 {font-family: 'Pacifico', cursive; font-size: 2rem; color: #333; text-align: center; margin-bottom: 2rem;} .alumni-grid {display: flex; gap: 20px; overflow-x: auto; padding-bottom: 1rem; justify-content: center;} .alumni-card {flex: 0 0 300px; background-color: #ffffff; border: 1px solid #cce0ff; border-radius: 8px; padding: 1rem; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); display: flex; flex-direction: column; min-height: 150px; margin-right: 1rem;} .alumni-card.large {flex: 0 0 450px; background-color: #e6f0ff;} .alumni-info {display: flex; align-items: center; margin-bottom: 0.5rem;} .alumni-info img {width: 50px; height: 50px; border-radius: 50%; margin-right: 10px; object-fit: cover;} .alumni-name-job span {display: block; font-size: 0.8rem; color: #666;} .alumni-card p.quote {font-size: 0.9rem; line-height: 1.5; color: #333; font-style: italic;}
         
-        /* =====================================
-        == STYLING BARU UNTUK FOOTER (DIRAPIKAN)
-        ===================================== */
+        /* == STYLING FOOTER == */
         .main-footer {
             background-color: #ffffff;
             color: #333;
@@ -303,8 +410,6 @@
             color: #d11e1f;
         }
         
-        /* --- Kolom Utama (Logo & Alamat) --- */
-        
         .footer-logo-kurikulum {
             display: flex;
             align-items: center;
@@ -322,10 +427,9 @@
             margin-top: 0.5rem;
             margin-bottom: 1rem;
             color: #d11e1f; 
-            text-transform: none; /* Override uppercase for main title */
+            text-transform: none; 
         }
         
-        /* Garis biru kotak seperti di gambar untuk alamat utama, DIBUAT LEBIH RAPI */
         .alamat-utama {
             border: 1px solid #1e90ff; 
             background-color: #f0f8ff; 
@@ -334,7 +438,6 @@
             margin-bottom: 15px;
         }
         
-        /* Styling untuk semua alamat dalam list */
         .footer-col ul li {
             display: flex;
             align-items: flex-start;
@@ -349,12 +452,10 @@
             color: #d11e1f; 
         }
 
-        /* Ikon alamat utama di dalam kotak biru berwarna biru */
         .alamat-utama li i {
             color: #1e90ff; 
         }
 
-        /* --- Kolom Ikuti Kami (Media Sosial) --- */
         .social-links {
             list-style: none;
             padding: 0;
@@ -379,7 +480,6 @@
             color: #d11e1f;
         }
         
-        /* Tambahkan Copyright Bar di bawah */
         .copyright {
             max-width: 1100px;
             margin: 2rem auto 0;
@@ -391,8 +491,22 @@
         }
 
 
-        /* MEDIA QUERY */
+        /* MEDIA QUERY (RESPONSIF) */
         @media (max-width: 800px) {
+            .hero-banner {
+                flex-direction: column-reverse;
+                padding: 2rem 1.5rem;
+                text-align: center;
+                justify-content: center;
+            }
+            .hero-text { margin-top: 2rem; max-width: 100%; padding-right: 0;}
+            .hero-desc { border-left: none; padding-left: 0; }
+            .hero-buttons { justify-content: center; }
+            .hero-title { font-size: 2.2rem; }
+            
+            .hero-image { justify-content: center; width: 100%; }
+            .hero-image img { max-width: 45%; } 
+
             .about-block, .legalitas-content {flex-direction: column; flex-wrap: wrap; padding: 1rem;}
             .about-block img {width: 100%; margin-right: 0; margin-bottom: 1rem; max-width: 100%;} 
             .legalitas-content {flex-direction: column-reverse;}
@@ -401,20 +515,10 @@
             .program-card {min-width: 100%;}
             .top-header {padding: 0.75rem 1rem; flex-wrap: nowrap; gap: 10px; position: relative;} .top-header .logo {width: 45px; height: 45px; margin: 0;} .top-header .header-content {position: static; transform: none; left: auto; top: auto; text-align: left; padding: 0; width: auto; margin-left: 10px;} .top-header h2 {font-size: 1.1rem;} .top-header h3, .top-header .tagline {font-size: 0.7rem;} .navbar {padding: 0.5rem 0.5rem;} .navbar .nav-links a {font-size: 0.8rem; padding: 0.5rem 0.5rem;} .container {margin-top: 1rem;} .pengajar-grid {grid-template-columns: repeat(3, 1fr); gap: 1rem;} .pengajar-card img {width: 60px; height: 60px;} .alumni-grid {justify-content: flex-start; padding: 0 1rem;} .alumni-card {flex: 0 0 250px;} .alumni-card.large {flex: 0 0 350px;}
             
-            /* Footer mobile */
-            .footer-content {
-                flex-direction: column; 
-                gap: 2rem;
-            }
-            .footer-col {
-                min-width: 100%; 
-            }
-            .alamat-utama {
-                padding: 15px;
-            }
-            .main-footer {
-                padding: 2rem 1rem;
-            }
+            .footer-content { flex-direction: column; gap: 2rem; }
+            .footer-col { min-width: 100%; }
+            .alamat-utama { padding: 15px; }
+            .main-footer { padding: 2rem 1rem; }
         }
     </style>
 </head>
@@ -440,6 +544,34 @@
             <a href="/kontak">Kontak</a>
         </div>
     </nav>
+
+    <section class="hero-banner">
+        
+        <div class="hero-text">
+            <h4 class="hero-subtitle">OPEN ENROLLMENT</h4>
+            
+            <h1 class="hero-title">
+                <span class="t-pink">HOME</span> <span class="t-purple">SCHOOLING</span><br>
+                <span class="t-pink">2026</span> <span class="t-purple">/</span> <span class="t-blue">2027</span>
+            </h1>
+            
+            <p class="hero-desc">
+                “Mulai dari SD hingga SMA, setiap program dibimbing tutor profesional serta dilengkapi 
+                dengan fasilitas terbaik untuk menunjang minat dan bakat siswa.”
+            </p>
+            
+            <div class="hero-buttons">
+                <a href="/pendaftaran" class="btn-daftar-hero">Pendaftaran</a>
+                <a href="tentang.php" class="btn-tentang-hero">Tentang Kami</a>
+            </div>
+        </div>
+
+        <div class="hero-image">
+            <img src="open enrollment.png" alt="Siswa Homeschooling 1">
+            <img src="open enrollment 2.png" alt="Siswa Homeschooling 2">
+        </div>
+
+    </section>
 
     <main class="container">
         
