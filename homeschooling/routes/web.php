@@ -19,6 +19,12 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+//rute tentang kami
+Route::get('/tentang', function () {
+    return view('tentang');
+})->name('tentang');
+
+
 // ==========================================================
 // RUTE UNTUK USER LOGIN
 // ==========================================================

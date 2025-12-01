@@ -537,11 +537,10 @@
 
     <nav class="navbar">
         <div class="nav-links">
-            <a href="Dashboard.php">Dashboard</a>
             <a href="tentang.php" class="active">Tentang</a>
             <a href="/ebook">E-book</a>
-            <a href="/pendaftaran">Pendaftaran</a>
-            <a href="/kontak">Kontak</a>
+            <a href="Pendaftaran.php">Pendaftaran</a>
+            <a href="kontak.php">Kontak</a>
         </div>
     </nav>
 
@@ -561,7 +560,7 @@
             </p>
             
             <div class="hero-buttons">
-                <a href="/pendaftaran" class="btn-daftar-hero">Pendaftaran</a>
+                <a href="Pendaftaran.php" class="btn-daftar-hero">Pendaftaran</a>
                 <a href="tentang.php" class="btn-tentang-hero">Tentang Kami</a>
             </div>
         </div>

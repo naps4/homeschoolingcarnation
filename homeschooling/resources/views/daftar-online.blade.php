@@ -283,163 +283,95 @@
 </style>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', () => {
+    const formSteps = Array.from(document.querySelectorAll('.form-step'));
+    const progressSteps = Array.from(document.querySelectorAll('.progress-step'));
+    const nextButtons = document.querySelectorAll('.btn-next');
+    const prevButtons = document.querySelectorAll('.btn-prev');
+    const form = document.getElementById('multiStepForm');
+    
+    // AMBIL STEP DARI SERVER (AMAN DARI ERROR SYNTAX)
+    let currentStep = Number("{{ session('active_step', 0) }}");
 
-    const steps = document.querySelectorAll(".form-step");
-    const nextButtons = document.querySelectorAll(".btn-next");
-    const prevButtons = document.querySelectorAll(".btn-prev");
-    const progressSteps = document.querySelectorAll(".progress-step");
-
-    let currentStep = 0;
-
-    function showStep(i) {
-        steps.forEach((s, idx) => s.classList.toggle("active", idx === i));
-        progressSteps.forEach((p, idx) => p.classList.toggle("active", idx <= i));
-        currentStep = i;
+    function showStep(stepIndex) {
+        formSteps.forEach((step, index) => {
+            step.classList.toggle('active', index === stepIndex);
+        });
+        progressSteps.forEach((step, index) => {
+            step.classList.toggle('active', index <= stepIndex);
+        });
+        currentStep = stepIndex;
     }
-
-    function addClientError(input, message) {
-        input.classList.add("input-error");
-        const next = input.nextElementSibling;
-        if (!next || !next.classList.contains("client-error")) {
-            const err = document.createElement("div");
-            err.className = "client-error";
-            err.innerText = message;
-            input.parentNode.appendChild(err);
-        }
-    }
-
-    function removeClientError(input) {
-        input.classList.remove("input-error");
-        if (input.nextElementSibling && input.nextElementSibling.classList.contains("client-error")) {
-            input.nextElementSibling.remove();
-        }
-    }
-
-    // Custom validation rules (name/place: letters+space; numbers: digits)
-    const rules = {
-        'nama_lengkap': {
-            test: function(v){ return !!v && /^[A-Za-z\s]+$/.test(v.trim()); },
-            message: "Nama hanya boleh berisi huruf dan spasi."
-        },
-        'nama_panggilan': {
-            test: function(v){ return !v || /^[A-Za-z\s]+$/.test(v.trim()); },
-            message: "Nama panggilan hanya huruf dan spasi jika diisi."
-        },
-        'tempat_lahir': {
-            test: function(v){ return !!v && /^[A-Za-z\s]+$/.test(v.trim()); },
-            message: "Tempat lahir hanya boleh huruf dan spasi."
-        },
-        'nama_ayah': {
-            test: function(v){ return !v || /^[A-Za-z\s]+$/.test(v.trim()); },
-            message: "Nama ayah hanya huruf dan spasi jika diisi."
-        },
-        'nama_ibu': {
-            test: function(v){ return !!v && /^[A-Za-z\s]+$/.test(v.trim()); },
-            message: "Nama ibu hanya huruf dan spasi."
-        },
-        'nama_wali': {
-            test: function(v){ return !v || /^[A-Za-z\s]+$/.test(v.trim()); },
-            message: "Nama wali hanya huruf dan spasi jika diisi."
-        },
-        'nik': {
-            test: function(v){ return !!v && /^\d{16}$/.test(v.trim()); },
-            message: "NIK harus 16 digit angka."
-        },
-        'telp_hp_ortu': {
-            test: function(v){ return !!v && /^\d{10,15}$/.test(v.trim()); },
-            message: "Nomor telepon harus 10-15 digit angka."
-        },
-        'nisn': {
-            test: function(v){ return !v || /^\d+$/.test(v.trim()); },
-            message: "NISN harus angka jika diisi."
-        }
-    };
 
     function validateStep(stepIndex) {
-        const inputs = steps[stepIndex].querySelectorAll("input, select, textarea");
-        let valid = true;
+        const currentStepEl = formSteps[stepIndex];
+        const inputs = currentStepEl.querySelectorAll('input[required], select[required], textarea[required]');
+        let isValid = true;
 
-        inputs.forEach(function(input){
-            removeClientError(input);
+        inputs.forEach(input => {
+            const errorBox = input.parentNode.querySelector('.client-error');
+            // Reset error dulu
+            input.classList.remove('input-error');
+            if(errorBox) errorBox.innerText = "";
 
-            // HTML required
-            if (input.hasAttribute('required') && !String(input.value || '').trim()) {
-                valid = false;
-                addClientError(input, "Field ini wajib diisi.");
-                return;
-            }
-
-            // custom rules by name
-            const name = input.getAttribute('name');
-            if (name && rules[name]) {
-                const ok = rules[name].test(input.value || '');
-                if (!ok) {
-                    valid = false;
-                    addClientError(input, rules[name].message);
-                    return;
-                }
-            }
-
-            // email type built-in validation
-            if (input.type === 'email' && input.value) {
-                if (!input.checkValidity()) {
-                    valid = false;
-                    addClientError(input, "Masukkan email yang valid.");
-                }
-            }
-
-            // file required
-            if (input.type === 'file' && input.hasAttribute('required')) {
-                if (!input.files || input.files.length === 0) {
-                    valid = false;
-                    addClientError(input, "Anda harus mengunggah file.");
-                }
+            // Cek kosong
+            if (!input.value.trim()) {
+                input.classList.add('input-error');
+                if(errorBox) errorBox.innerText = "Wajib diisi";
+                isValid = false;
             }
         });
 
-        return valid;
+        // Validasi khusus checkbox di step terakhir
+        if(stepIndex === 3) {
+            const checkbox = document.getElementById('persetujuan');
+            // Cari error box terdekat (biasanya sibling atau parent sibling)
+            const cbErrorContainer = checkbox.parentElement.nextElementSibling; 
+            if(!checkbox.checked) {
+                if(cbErrorContainer && cbErrorContainer.classList.contains('client-error')) {
+                    cbErrorContainer.innerText = "Anda harus menyetujui pernyataan ini.";
+                }
+                isValid = false;
+            }
+        }
+
+        return isValid;
     }
 
-    nextButtons.forEach(function(btn){
-        btn.addEventListener('click', function(){
-            if (!validateStep(currentStep)) {
-                const firstErr = document.querySelector('.input-error');
-                if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                return;
+    nextButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (validateStep(currentStep)) {
+                if (currentStep < formSteps.length - 1) {
+                    showStep(currentStep + 1);
+                }
             }
-            if (currentStep < steps.length - 1) showStep(currentStep + 1);
         });
     });
 
-    prevButtons.forEach(function(btn){
-        btn.addEventListener('click', function(){
-            if (currentStep > 0) showStep(currentStep - 1);
+    prevButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (currentStep > 0) {
+                showStep(currentStep - 1);
+            }
         });
     });
 
-    // restore server-provided active step (jika ada)
-    const initialStep = {!! json_encode(session('active_step', 0)) !!};
-    showStep(initialStep);
-
-    // highlight server-side errors (jika ada)
-    const serverErrors = {!! json_encode($errors->keys() ?? []) !!};
+    // Highlight Error dari Server (Jika ada)
+    // Menggunakan JSON.parse untuk menghindari error syntax di editor
+    const serverErrors = JSON.parse('{!! json_encode($errors->keys() ?? []) !!}');
+    
     if (Array.isArray(serverErrors) && serverErrors.length > 0) {
-        serverErrors.forEach(function(name){
-            const inp = document.querySelector('[name="'+name+'"]');
-            if (inp) addClientError(inp, "Silakan perbaiki field ini.");
-        });
-
-        // buka step yang berisi error pertama
-        const first = serverErrors[0];
-        for (let i = 0; i < steps.length; i++) {
-            if (steps[i].querySelector('[name="'+first+'"]')) {
+        const firstErrorField = serverErrors[0];
+        // Cari step yang mengandung field error
+        for (let i = 0; i < formSteps.length; i++) {
+            if (formSteps[i].querySelector(`[name="${firstErrorField}"]`)) {
                 showStep(i);
                 break;
             }
         }
+    } else {
+        showStep(currentStep);
     }
-
 });
 </script>
 
