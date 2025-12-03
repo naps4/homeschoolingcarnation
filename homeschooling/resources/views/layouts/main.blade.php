@@ -1,177 +1,133 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{-- META VIEWPORT WAJIB AGAR RESPONSIF DI HP --}}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
     <title>@yield('title', 'Homeschooling Carnation')</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Pacifico&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        /* --- Reset & Pengaturan Dasar --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background-color: #f4f4f8; min-height: 100vh; }
-        header { width: 100%; }
-
-        /* =====================================
-           1. HEADER UTAMA (MERAH)
-        ===================================== */
-        .top-header {
-            background-color: #d11e1f; 
-            color: #ffffff;
-            padding: 2.5rem 1.5rem; 
-            display: flex;
-            align-items: center; 
-            position: relative; 
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-            border-bottom: 6px solid #a81819; 
-        }
-
-        .top-header .logo {
-            width: 85px; height: 85px; flex-shrink: 0; z-index: 2; 
-        }
-
-        .top-header .header-content {
-            position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); 
-            text-align: center; width: 100%; padding: 0 120px; box-sizing: border-box; z-index: 1;
-        }
-
-        .top-header h3 {
-            font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 400; margin: 0; line-height: 1; margin-bottom: 8px; letter-spacing: 1.5px;
-        }
-        .top-header h2 {
-            font-family: 'Oswald', sans-serif; font-size: 2.2rem; font-weight: 700; margin: 0; line-height: 1.1;
-        }
-        .top-header .tagline {
-            font-family: 'Pacifico', cursive; font-size: 1.1rem; font-weight: 400; margin-top: 8px; opacity: 0.95;
-        }
-
-        /* =====================================
-           2. NAVBAR BERSIH (PUTIH)
-        ===================================== */
-        .navbar {
-            background-color: #ffffff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-            padding: 0.75rem 2rem;
-            position: sticky; top: 0; z-index: 100;
-        }
-
-        .navbar-container {
-            max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;
-        }
-
-        .nav-menu { display: flex; gap: 1.5rem; align-items: center; }
-        .nav-auth { display: flex; gap: 1rem; align-items: center; }
-
-        .navbar a, .navbar button {
-            text-decoration: none; color: #222; font-weight: 600; font-size: 1rem;
-            padding: 0.5rem 0; border-bottom: 3px solid transparent;
-            transition: all 0.3s ease; cursor: pointer; font-family: 'Poppins', sans-serif;
-        }
-        
-        .nav-menu a:hover, .nav-menu a.active { color: #d11e1f; border-bottom-color: #d11e1f; }
-
-        .nav-auth a.login-btn { 
-            background-color: #4A90E2; color: white; padding: 0.5rem 1.5rem; border-radius: 50px; 
-        }
-        .nav-auth a.login-btn:hover { background-color: #357ABD; border-bottom: 3px solid transparent; transform: translateY(-2px); }
-        
-        .nav-auth a.register-btn {
-            color: #4A90E2; border: 2px solid #4A90E2; padding: 0.4rem 1.4rem; border-radius: 50px;
-        }
-        .nav-auth a.register-btn:hover { background-color: #4A90E2; color: white; border-bottom: 3px solid transparent; }
-
-        .nav-auth button.logout-btn { 
-            background: none; border: 2px solid #dc3545; color: #dc3545; 
-            padding: 0.4rem 1.2rem; border-radius: 50px; font-weight: 600;
-        }
-        .nav-auth button.logout-btn:hover { background-color: #dc3545; color: white; border-bottom: 3px solid transparent; }
-
-        /* =====================================
-           3. CONTAINER & UTILS
-        ===================================== */
-        .container { max-width: 1100px; margin: 2rem auto; padding: 0 1.5rem; }
-        
-        /* -- PERBAIKAN: Wrapper untuk Login/Register -- */
-        /* Ini membuat form ada di tengah layar TANPA merusak header */
-        .auth-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: calc(100vh - 280px); /* Tinggi layar dikurangi tinggi header */
-            padding: 2rem 0;
-        }
-
-        /* --- Styles untuk Welcome Page --- */
-        .welcome-header { margin-bottom: 2rem; text-align: center; }
-        .welcome-header h1 { font-family: 'Oswald', sans-serif; font-size: 2.8rem; color: #222; font-weight: 700; text-transform: uppercase; }
-        .welcome-header p { font-family: 'Pacifico', cursive; font-size: 1.8rem; color: #444; margin-top: 0.5rem; }
-        .cta-section { display: flex; justify-content: center; gap: 2rem; margin-top: 3rem; }
-        .cta-button { padding: 1rem 3rem; border-radius: 50px; text-decoration: none; color: white !important; font-family: 'Oswald', sans-serif; font-size: 1.2rem; font-weight: 700; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); box-shadow: 0 5px 15px rgba(0,0,0,0.15); transition: transform 0.3s; }
-        .cta-button:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.25); }
-        .btn-red { background-color: #ff0000; } .btn-green { background-color: #00c853; }
-
-        /* --- Styles untuk Form (Login/Reg/Daftar) --- */
-        .login-container, .register-container, .form-container {
-            background-color: #ffffff; padding: 2.5rem; border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 90%; max-width: 400px; margin: 0 auto;
-        }
-        .form-container { max-width: 750px; } /* Form daftar lebih lebar */
-        
-        h2 { text-align: center; color: #333; margin-bottom: 2rem; font-weight: 700; }
-        .input-group { margin-bottom: 1.5rem; }
-        .input-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #555; }
-        .input-group input, .input-group select, .input-group textarea { width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; background-color: #fafafa; font-size: 1rem; }
-        
-        /* Tombol Form Umum */
-        .btn, .login-button, .register-button { width: 100%; padding: 0.8rem; border: none; border-radius: 5px; font-weight: 600; cursor: pointer; color: white; text-align: center; display: inline-block; transition: 0.3s; }
-        .login-button { background-color: #4A90E2; } .login-button:hover { background-color: #357ABD; }
-        .register-button { background-color: #28a745; } .register-button:hover { background-color: #218838; }
-        .btn-next { background-color: #4A90E2; } .btn-prev { background-color: #aaa; } .btn-submit { background-color: #28a745; }
-
-        /* Google Button */
-        .google-login-button { display: flex; justify-content: center; align-items: center; width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; background: white; color: #555; font-weight: 600; text-decoration: none; margin-bottom: 1rem; transition: 0.3s; }
-        .google-login-button:hover { background: #f9f9f9; }
-        .google-logo { width: 20px; margin-right: 10px; }
-        .separator { display: flex; align-items: center; text-align: center; color: #aaa; margin: 1.5rem 0; }
-        .separator::before, .separator::after { content: ''; flex: 1; border-bottom: 1px solid #ddd; }
-        .separator span { padding: 0 10px; font-size: 0.9rem; }
-        .links { display: flex; justify-content: space-between; font-size: 0.9rem; margin-top: 1rem; }
-
-        /* Progress Bar & Form Step (Daftar) */
-        .progress-bar { display: flex; justify-content: space-between; padding: 1.5rem 2rem; border-bottom: 1px solid #ddd; margin-bottom: 2rem; }
-        .progress-step { display: flex; flex-direction: column; align-items: center; font-size: 0.8rem; color: #aaa; width: 25%; text-align: center; }
-        .progress-step.active { color: #d90429; }
-        .step-number { width: 30px; height: 30px; border-radius: 50%; background-color: #eee; display: flex; justify-content: center; align-items: center; margin-bottom: 0.5rem; }
-        .progress-step.active .step-number { background-color: #d90429; color: white; }
-        .form-step { display: none; } .form-step.active { display: block; animation: fadeIn 0.5s; }
-        .form-row { display: flex; gap: 1rem; } .form-row .input-group { width: 50%; }
-        .button-group { display: flex; justify-content: space-between; margin-top: 2rem; }
-        .btn { width: auto; padding: 0.75rem 2rem; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Responsive */
-        @media (max-width: 800px) {
-            .top-header { flex-wrap: wrap; justify-content: center; text-align: center; padding: 1rem; }
-            .top-header .header-content { position: static; transform: none; padding: 0; margin-top: 1rem; }
-            .navbar-container { flex-direction: column; gap: 1rem; }
-            .nav-menu, .nav-auth { width: 100%; justify-content: center; flex-wrap: wrap; }
-            .form-row { flex-direction: column; } .form-row .input-group { width: 100%; }
-            .cta-section { flex-direction: column; } .cta-button { width: 100%; }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Pacifico&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
 
-<body> <header>
+    <style>
+        /* --- GLOBAL STYLE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #e6f0ff 0%, #fff0f5 50%, #fffdf0 100%);
+            min-height: 100vh;
+            display: flex; flex-direction: column;
+            overflow-x: hidden; /* Mencegah scroll samping berlebih */
+        }
+
+        /* --- HEADER --- */
+        .top-header {
+            background-color: #d11e1f; color: #ffffff; padding: 1rem 1.5rem;
+            display: flex; align-items: center; position: relative;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); border-bottom: 5px solid #a81819;
+            flex-wrap: wrap; /* Agar bisa turun ke bawah di HP */
+        }
+        .top-header .logo { width: 55px; height: 55px; object-fit: contain; z-index: 2; }
+        .top-header .header-content {
+            flex: 1; text-align: center; padding: 0 1rem;
+        }
+        .top-header h3 { font-size: 0.8rem; font-weight: 400; margin-bottom: 2px; }
+        .top-header h2 { font-family: 'Oswald', sans-serif; font-size: 1.4rem; font-weight: 700; line-height: 1.2; }
+        .top-header .tagline { font-family: 'Pacifico', cursive; font-size: 0.9rem; margin-top: 5px; }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            background-color: #ffffff; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky; top: 0; z-index: 100;
+            padding: 0 1rem;
+        }
+        .nav-links { 
+            display: flex; justify-content: center; align-items: center; 
+            overflow-x: auto; /* Scroll samping jika menu kepanjangan di HP */
+            white-space: nowrap;
+            padding: 0.8rem 0;
+            -webkit-overflow-scrolling: touch; /* Smooth scroll di iOS */
+        }
+        .nav-links a {
+            text-decoration: none; color: #222; font-weight: 600; font-size: 0.95rem;
+            padding: 0.5rem 1rem; border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: #d11e1f; border-bottom-color: #d11e1f;
+        }
+
+        /* --- FOOTER --- */
+        .main-footer {
+            background-color: #ffffff; color: #333; padding: 3rem 1.5rem;
+            border-top: 5px solid #d11e1f; font-size: 0.9rem; margin-top: auto;
+        }
+        .footer-content {
+            max-width: 1100px; margin: 0 auto; display: flex;
+            justify-content: space-between; gap: 2rem; flex-wrap: wrap;
+        }
+        .footer-col { flex: 1 1 250px; /* Minimal lebar 250px agar responsive */ }
+        .footer-col h3 {
+            font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 700;
+            margin-bottom: 1.2rem; text-transform: uppercase; color: #333;
+        }
+        .footer-col.homeschooling h3 { color: #d11e1f; }
+        .footer-col ul { list-style: none; padding: 0; }
+        .footer-col ul li { margin-bottom: 0.8rem; }
+        .footer-col a { text-decoration: none; color: #555; transition: 0.2s; }
+        
+        .footer-logo-kurikulum { display: flex; align-items: center; margin-bottom: 1rem; }
+        .footer-logo-kurikulum img { height: 40px; margin-right: 15px; }
+        
+        .alamat-utama {
+            border: 1px solid #1e90ff; background-color: #f0f8ff;
+            padding: 15px; border-radius: 8px; margin-bottom: 15px;
+        }
+        .alamat-utama i, .footer-col i { color: #1e90ff; margin-right: 10px; }
+        
+        .copyright {
+            max-width: 1100px; margin: 2rem auto 0; text-align: center;
+            padding-top: 1rem; border-top: 1px dashed #ccc; color: #777; font-size: 0.85rem;
+        }
+
+        /* --- GLOBAL RESPONSIVE FIX (MOBILE) --- */
+        @media (max-width: 768px) {
+            /* Header */
+            .top-header { flex-direction: column; text-align: center; padding: 1rem; gap: 10px; }
+            .top-header .header-content { width: 100%; padding: 0; }
+            .top-header h2 { font-size: 1.2rem; }
+            
+            /* Navbar */
+            .navbar { padding: 0; }
+            .nav-links { justify-content: flex-start; padding: 0.8rem 1rem; }
+            .nav-links a { font-size: 0.85rem; padding: 0.5rem 0.8rem; }
+
+            /* Footer */
+            .footer-content { flex-direction: column; gap: 2rem; }
+            .footer-col { width: 100%; text-align: center; }
+            .footer-logo-kurikulum { justify-content: center; }
+            
+            /* Form Responsive Overrides (Untuk jaga-jaga) */
+            .form-wrapper { padding: 2rem 1rem !important; }
+            .form-container { width: 100% !important; padding: 1.5rem !important; margin: 0 !important; }
+            .form-row { grid-template-columns: 1fr !important; gap: 1rem !important; }
+            .button-group { flex-direction: column-reverse; gap: 10px; }
+            .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
         <div class="top-header">
             <a href="{{ route('home') }}">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo HSCC" class="logo">
+                <img src="{{ asset('images/Logo HSCC Genap - Copy.png') }}" alt="Logo HSCC" class="logo">
             </a>
             <div class="header-content">
                 <h3>SELAMAT DATANG DI WEBSITE</h3> 
@@ -182,50 +138,80 @@
     </header>
 
     <nav class="navbar">
-        <div class="navbar-container">
-            <div class="nav-menu">
-                <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
-                <a href="{{ route('daftar.online') }}" class="{{ request()->routeIs('daftar.*') ? 'active' : '' }}">Pendaftaran</a>
-                <a href="{{ route('tentang') }}" class="{{ request()->routeIs('tentang') ? 'active' : '' }}">Tentang Kami</a>
-            </div>
-
-            <div class="nav-auth">
-                @auth
-                    <span style="color: #666; font-weight: 600; font-size: 0.9rem;">Halo, {{ Auth::user()->name }}</span>
-                    <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+        <div class="nav-links">
+            <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Tentang</a>
+            <a href="https://homeschoolingcarnation.sch.id/ebook/" target="_blank">E-book</a>
+            <a href="{{ route('pendaftaran.menu') }}" class="{{ request()->routeIs('pendaftaran.*') || request()->routeIs('daftar.*') ? 'active' : '' }}">Pendaftaran</a>
+            <a href="{{ route('kontak') }}" class="{{ request()->routeIs('kontak') ? 'active' : '' }}">Kontak</a>
+            
+            @auth
+                <div style="display: flex; align-items: center; gap: 10px; margin-left: 10px;">
+                    <span style="font-size: 0.8rem; font-weight: 600; color: #333; display:none;">Hi, {{ Auth::user()->name }}</span>
+                    <form method="POST" action="{{ route('logout') }}" style="margin:0;">
                         @csrf
-                        <button type="submit" class="logout-btn">Logout</button>
+                        <button type="submit" style="background: white; border: 1px solid #d11e1f; color: #d11e1f; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">
+                            Logout
+                        </button>
                     </form>
-                @else
-                    <a href="{{ route('login') }}" class="login-btn">Login</a>
-                    <a href="{{ route('register') }}" class="register-btn">Daftar</a>
-                @endauth
-            </div>
+                </div>
+            @else
+                <a href="{{ route('login') }}" style="color: #4A90E2; font-weight: bold;">Login</a>
+            @endauth
         </div>
     </nav>
-
-    @if (session('status'))
-    <div class="container" style="margin-bottom: -1rem; margin-top: 1rem;">
-        <div style="background-color: #d4edda; color: #155724; border-color: #c3e6cb; padding: 1rem; border-radius: 5px; text-align: center; font-weight: 600;">
-            {{ session('status') }}
-        </div>
-    </div>
-    @endif
 
     <main>
         @yield('content')
     </main>
 
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-col homeschooling">
+                <div class="footer-logo-kurikulum">
+                    <img src="{{ asset('images/Logo HSCC Genap - Copy.png') }}" alt="Logo HSCC">
+                    <img src="{{ asset('images/kurikulum merdeka.png') }}" alt="Kurikulum Merdeka"> 
+                </div>
+                <h3>HOMESCHOOLING CARNATION CIREBON</h3>
+                <div class="alamat-utama">
+                    <ul>
+                        <li><i class="fa-solid fa-location-dot"></i> <span>HSCC 1, Jl. Ciremai Raya No. E 12 Perumnas, Cirebon.</span></li>
+                    </ul>
+                </div>
+                <ul>
+                    <li><i class="fa-solid fa-location-dot"></i> <span>HSCC 2, Ruko Berry Green No. 21, CSB Mall.</span></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>PINTASAN</h3>
+                <ul>
+                    <li><a href="{{ route('home') }}">Tentang Kami</a></li>
+                    <li><a href="{{ route('pendaftaran.menu') }}">Info Pendaftaran</a></li>
+                    <li><a href="{{ route('kontak') }}">Hubungi Kami</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>IKUTI KAMI</h3>
+                <ul class="social-links" style="display:flex; gap:15px; font-size:1.5rem;">
+                    <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-tiktok"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Homeschooling Carnation Cirebon. All Rights Reserved.
+        </div>
+    </footer>
+
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/assets/css/chat.min.css">
     <script>
         var botmanWidget = {
-            aboutText: 'Homeschooling Carnation',
-            introMessage: "Halo! 👋 Saya asisten virtual Homeschooling Carnation. Ketik 'halo' untuk memulai!",
-            title: 'Bantuan Pendaftaran',
-            mainColor: '#d90429',
-            bubbleBackground: '#d90429',
-            headerTextColor: '#fff',
-            desktopHeight: 450, desktopWidth: 370
+            aboutText: 'HS Carnation', introMessage: "Halo! 👋 Ada yang bisa kami bantu?",
+            title: 'Bantuan', mainColor: '#d11e1f', bubbleBackground: '#d11e1f', headerTextColor: '#fff',
+            desktopHeight: 450, desktopWidth: 320, // Diperkecil agar pas di HP
+            mobileHeight: '90%', mobileWidth: '90%'
         };
     </script>
     <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
