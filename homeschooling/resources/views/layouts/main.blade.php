@@ -2,7 +2,6 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    {{-- META VIEWPORT WAJIB AGAR RESPONSIF DI HP --}}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <title>@yield('title', 'Homeschooling Carnation')</title>
@@ -15,28 +14,51 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
-        /* --- GLOBAL STYLE --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+        /* ==========================================================
+           🔥 GLOBAL FIX — HAPUS GARIS BIRU + TAMPILKAN GRADIENT
+        ========================================================== */
+
+        /* Hapus semua background-image yang berasal dari app.css */
+        * {
+            background-image: none !important;
+        }
+
+        /* Body pakai gradient lembut seperti hero */
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #e6f0ff 0%, #fff0f5 50%, #fffdf0 100%);
+            background: linear-gradient(105deg, #fff0f0 0%, #fff5f5 40%, #f0f4ff 100%) !important;
             min-height: 100vh;
-            display: flex; flex-direction: column;
-            overflow-x: hidden; /* Mencegah scroll samping berlebih */
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
         }
+
+        /* Main & Container transparan, biar efek gradient dari body terlihat */
+        main,
+        .container {
+            background-color: transparent !important;
+        }
+
+        /* Hero-banner tetap punya gradient sendiri */
+        .hero-banner {
+            background: linear-gradient(105deg, #fff0f0 0%, #fff5f5 40%, #f0f4ff 100%) !important;
+        }
+
+
+        /* ==========================================================
+           🔰 GLOBAL STYLE NORMAL (TIDAK DIUBAH)
+        ========================================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         /* --- HEADER --- */
         .top-header {
             background-color: #d11e1f; color: #ffffff; padding: 1rem 1.5rem;
             display: flex; align-items: center; position: relative;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); border-bottom: 5px solid #a81819;
-            flex-wrap: wrap; /* Agar bisa turun ke bawah di HP */
+            flex-wrap: wrap;
         }
         .top-header .logo { width: 55px; height: 55px; object-fit: contain; z-index: 2; }
-        .top-header .header-content {
-            flex: 1; text-align: center; padding: 0 1rem;
-        }
+        .top-header .header-content { flex: 1; text-align: center; padding: 0 1rem; }
         .top-header h3 { font-size: 0.8rem; font-weight: 400; margin-bottom: 2px; }
         .top-header h2 { font-family: 'Oswald', sans-serif; font-size: 1.4rem; font-weight: 700; line-height: 1.2; }
         .top-header .tagline { font-family: 'Pacifico', cursive; font-size: 0.9rem; margin-top: 5px; }
@@ -49,10 +71,9 @@
         }
         .nav-links { 
             display: flex; justify-content: center; align-items: center; 
-            overflow-x: auto; /* Scroll samping jika menu kepanjangan di HP */
-            white-space: nowrap;
+            overflow-x: auto; white-space: nowrap;
             padding: 0.8rem 0;
-            -webkit-overflow-scrolling: touch; /* Smooth scroll di iOS */
+            -webkit-overflow-scrolling: touch;
         }
         .nav-links a {
             text-decoration: none; color: #222; font-weight: 600; font-size: 0.95rem;
@@ -72,53 +93,44 @@
             max-width: 1100px; margin: 0 auto; display: flex;
             justify-content: space-between; gap: 2rem; flex-wrap: wrap;
         }
-        .footer-col { flex: 1 1 250px; /* Minimal lebar 250px agar responsive */ }
+        .footer-col { flex: 1 1 250px; }
         .footer-col h3 {
             font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 700;
             margin-bottom: 1.2rem; text-transform: uppercase; color: #333;
         }
         .footer-col.homeschooling h3 { color: #d11e1f; }
+
         .footer-col ul { list-style: none; padding: 0; }
         .footer-col ul li { margin-bottom: 0.8rem; }
         .footer-col a { text-decoration: none; color: #555; transition: 0.2s; }
-        
+
         .footer-logo-kurikulum { display: flex; align-items: center; margin-bottom: 1rem; }
         .footer-logo-kurikulum img { height: 40px; margin-right: 15px; }
-        
+
         .alamat-utama {
             border: 1px solid #1e90ff; background-color: #f0f8ff;
             padding: 15px; border-radius: 8px; margin-bottom: 15px;
         }
         .alamat-utama i, .footer-col i { color: #1e90ff; margin-right: 10px; }
-        
+
         .copyright {
             max-width: 1100px; margin: 2rem auto 0; text-align: center;
             padding-top: 1rem; border-top: 1px dashed #ccc; color: #777; font-size: 0.85rem;
         }
 
-        /* --- GLOBAL RESPONSIVE FIX (MOBILE) --- */
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            /* Header */
             .top-header { flex-direction: column; text-align: center; padding: 1rem; gap: 10px; }
             .top-header .header-content { width: 100%; padding: 0; }
             .top-header h2 { font-size: 1.2rem; }
-            
-            /* Navbar */
+
             .navbar { padding: 0; }
             .nav-links { justify-content: flex-start; padding: 0.8rem 1rem; }
             .nav-links a { font-size: 0.85rem; padding: 0.5rem 0.8rem; }
 
-            /* Footer */
             .footer-content { flex-direction: column; gap: 2rem; }
             .footer-col { width: 100%; text-align: center; }
             .footer-logo-kurikulum { justify-content: center; }
-            
-            /* Form Responsive Overrides (Untuk jaga-jaga) */
-            .form-wrapper { padding: 2rem 1rem !important; }
-            .form-container { width: 100% !important; padding: 1.5rem !important; margin: 0 !important; }
-            .form-row { grid-template-columns: 1fr !important; gap: 1rem !important; }
-            .button-group { flex-direction: column-reverse; gap: 10px; }
-            .btn { width: 100%; }
         }
     </style>
 </head>
@@ -146,7 +158,6 @@
             
             @auth
                 <div style="display: flex; align-items: center; gap: 10px; margin-left: 10px;">
-                    <span style="font-size: 0.8rem; font-weight: 600; color: #333; display:none;">Hi, {{ Auth::user()->name }}</span>
                     <form method="POST" action="{{ route('logout') }}" style="margin:0;">
                         @csrf
                         <button type="submit" style="background: white; border: 1px solid #d11e1f; color: #d11e1f; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">
@@ -169,14 +180,16 @@
             <div class="footer-col homeschooling">
                 <div class="footer-logo-kurikulum">
                     <img src="{{ asset('images/Logo HSCC Genap - Copy.png') }}" alt="Logo HSCC">
-                    <img src="{{ asset('images/kurikulum merdeka.png') }}" alt="Kurikulum Merdeka"> 
+                    <img src="{{ asset('images/kurikulum merdeka.png') }}" alt="Kurikulum Merdeka">
                 </div>
                 <h3>HOMESCHOOLING CARNATION CIREBON</h3>
+
                 <div class="alamat-utama">
                     <ul>
                         <li><i class="fa-solid fa-location-dot"></i> <span>HSCC 1, Jl. Ciremai Raya No. E 12 Perumnas, Cirebon.</span></li>
                     </ul>
                 </div>
+
                 <ul>
                     <li><i class="fa-solid fa-location-dot"></i> <span>HSCC 2, Ruko Berry Green No. 21, CSB Mall.</span></li>
                 </ul>
@@ -200,20 +213,28 @@
                 </ul>
             </div>
         </div>
+
         <div class="copyright">
             &copy; 2025 Homeschooling Carnation Cirebon. All Rights Reserved.
         </div>
     </footer>
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/assets/css/chat.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/assets/css/chat.min.css">
     <script>
         var botmanWidget = {
-            aboutText: 'HS Carnation', introMessage: "Halo! 👋 Ada yang bisa kami bantu?",
-            title: 'Bantuan', mainColor: '#d11e1f', bubbleBackground: '#d11e1f', headerTextColor: '#fff',
-            desktopHeight: 450, desktopWidth: 320, // Diperkecil agar pas di HP
-            mobileHeight: '90%', mobileWidth: '90%'
+            aboutText: 'HS Carnation',
+            introMessage: "Halo! 👋 Ada yang bisa kami bantu?",
+            title: 'Bantuan',
+            mainColor: '#d11e1f',
+            bubbleBackground: '#d11e1f',
+            headerTextColor: '#fff',
+            desktopHeight: 450,
+            desktopWidth: 320,
+            mobileHeight: '90%',
+            mobileWidth: '90%'
         };
     </script>
-    <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js"></script>
+
 </body>
 </html>
