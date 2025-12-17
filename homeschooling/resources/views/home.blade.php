@@ -154,14 +154,37 @@
     </div>
 
     <h1 class="section-title-custom">TENAGA PENGAJAR</h1>
-    <div class="pengajar-grid">
-        @for($i=1; $i<=10; $i++)
-        <div class="pengajar-card"> 
-            <img src="{{ asset('images/Logo HSCC Genap - Copy.png') }}" alt="Guru" style="border: 1px solid #ddd;"> 
-            <span>TUTOR {{ $i }}</span> 
+    <section class="teachers-section" style="padding: 4rem 1.5rem; background-color: #fff;">
+    <div class="container" style="max-width: 1100px; margin: 0 auto; text-align: center;">
+
+        <div class="teachers-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+            
+            @forelse($pengajars as $pengajar)
+                <div class="teacher-card" style="background: #f9f9f9; padding: 1.5rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s;">
+                    <div style="width: 120px; height: 120px; margin: 0 auto 1rem; border-radius: 50%; overflow: hidden; border: 3px solid #d11e1f;">
+                        @if($pengajar->foto)
+                            <img src="{{ asset('storage/' . $pengajar->foto) }}" alt="{{ $pengajar->nama }}" style="width: 100%; height: 100%; object-fit: cover;">
+                        @else
+                            <img src="https://ui-avatars.com/api/?name={{ urlencode($pengajar->nama) }}&background=d11e1f&color=fff" style="width: 100%; height: 100%; object-fit: cover;">
+                        @endif
+                    </div>
+
+                    <h3 style="font-size: 1.2rem; font-weight: 700; color: #333; margin-bottom: 0.5rem;">{{ $pengajar->nama }}</h3>
+                    <p style="color: #d11e1f; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.8rem;">{{ $pengajar->jabatan }}</p>
+                    
+                    @if($pengajar->deskripsi)
+                        <p style="font-size: 0.85rem; color: #666; line-height: 1.5;">
+                            "{{ $pengajar->deskripsi }}"
+                        </p>
+                    @endif
+                </div>
+            @empty
+                <p style="width: 100%; text-align: center; color: #777;">Belum ada data pengajar.</p>
+            @endforelse
+
         </div>
-        @endfor
     </div>
+</section>
 
     <section class="alumni-section">
         <h4>Apa kata alumni?</h4>

@@ -5,6 +5,8 @@ use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\DaftarTrialController;
 use App\Http\Controllers\DaftarOnlineController;
 use App\Http\Controllers\BotManController;
+use App\Models\Pengajar;
+
 
 // Rute Home
 Route::get('/', function () {
@@ -42,6 +44,22 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/daftar-online', [DaftarOnlineController::class, 'store'])->name('daftar.online.store');
     Route::get('/daftar-online/bukti/{id}', [DaftarOnlineController::class, 'showBukti'])->name('daftar.online.bukti');
 });
+
+Route::middleware(['auth'])->group(function () {
+    // ... route yang sudah ada ...
+    
+    // Tambahkan Route Download PDF Admin ini:
+    Route::get('/admin/download-pdf/{id}', [DaftarOnlineController::class, 'downloadPdf'])
+        ->name('admin.download.pdf');
+});
+
+Route::get('/', function () {
+    // Ambil semua data pengajar
+    $pengajars = Pengajar::all(); 
+    
+    // Kirim ke view 'home'
+    return view('home', compact('pengajars'));
+})->name('home');
 
 Route::match(['get', 'post'], '/botman', [BotManController::class, 'handle']);
 require __DIR__.'/auth.php';

@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Notifications\ResetPasswordNotification; // <--- 1. JANGAN LUPA INI
 
 class User extends Authenticatable
 {
@@ -15,18 +16,13 @@ class User extends Authenticatable
     /**
      * The attributes that are mass assignable.
      *
-     * @var list<string>
-     */
-    /**
-     * The attributes that are mass assignable.
-     *
      * @var array<int, string>
      */
     protected $fillable = [
         'name',
         'email',
         'password',
-        'google_id', // <-- google
+        'google_id',
     ];
 
     /**
@@ -50,5 +46,16 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Mengirim notifikasi reset password dengan template custom.
+     * * @param  string  $token
+     * @return void
+     */
+    // 2. FUNGSI INI WAJIB ADA AGAR EMAIL CUSTOM MUNCUL
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
     }
 }
